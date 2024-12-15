@@ -10,11 +10,11 @@
 
 class IndividualClass : public BaseClass {
   private:
-    std::pair<unsigned long long, bool> enrolledStudent;
+    std::pair<unsigned long long, unsigned short int> enrolledStudent;
 
   public:
     IndividualClass(unsigned long long id, unsigned long long courseId, 
-                    std::pair<unsigned long long, bool> enrolledStudent, Money price)
+                    std::pair<unsigned long long, unsigned short int> enrolledStudent, Money price)
         : BaseClass(id, courseId, price), enrolledStudent(enrolledStudent) {}
 
     std::pair<unsigned long long, bool> getEnrolledStudent() const {
@@ -22,9 +22,8 @@ class IndividualClass : public BaseClass {
     }
 
     bool enrollStudent(unsigned long long studentId) override {
-        // Логика зачисления студента в индивидуальный класс
         if (enrolledStudent.first == studentId && enrolledStudent.second) {
-            return false; // Студент уже зачислен
+            return false;
         }
         enrolledStudent = {studentId, true};
         return true;
@@ -32,10 +31,10 @@ class IndividualClass : public BaseClass {
 
     bool dropStudent(unsigned long long studentId) override {
         if (enrolledStudent.first == studentId && enrolledStudent.second) {
-            enrolledStudent.second = false; // Удаляем зачисление студента
+            enrolledStudent.second = false;
             return true;
         }
-        return false; // Студент не найден или не зачислен
+        return false;
     }
 
     bool isStudentEnrolled(unsigned long long studentId) const override {

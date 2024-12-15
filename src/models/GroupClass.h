@@ -10,25 +10,25 @@
 
 class GroupClass : public BaseClass {
   private:
-    std::vector<std::pair<unsigned long long, bool>> enrolledStudents;
+    std::vector<std::pair<unsigned long long, unsigned short int>> enrolledStudents;
 
   public:
     GroupClass(unsigned long long id, unsigned long long courseId, 
-               std::vector<std::pair<unsigned long long, bool>> enrolledStudents, Money price)
+               std::vector<std::pair<unsigned long long, unsigned short int>> enrolledStudents, Money price)
         : BaseClass(id, courseId, price), enrolledStudents(enrolledStudents) {}
 
     unsigned short getGroupSize() const {
         return static_cast<unsigned short>(enrolledStudents.size());
     }
 
-    std::vector<std::pair<unsigned long long, bool>> getEnrolledStudents() const {
+    std::vector<std::pair<unsigned long long, unsigned short int>> getEnrolledStudents() const {
         return enrolledStudents;
     }
 
     bool enrollStudent(unsigned long long studentId) override {
         for (const auto& student : enrolledStudents) {
             if (student.first == studentId) {
-                return false; // Студент уже зачислен
+                return false;
             }
         }
         enrolledStudents.emplace_back(studentId, true);
