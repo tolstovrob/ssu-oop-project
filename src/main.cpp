@@ -2,12 +2,12 @@
 #include <string>
 #include <vector>
 
-#include "models/EnrollRequest.h"
-#include "models/GroupClass.h"
-#include "models/IndividualClass.h"
-#include "models/Course.h"
-#include "models/Student.h"
-#include "models/Money.h"
+#include "models/EnrollRequest/EnrollRequest.h"
+#include "models/GroupClass/GroupClass.h"
+#include "models/IndividualClass/IndividualClass.h"
+#include "models/Course/Course.h"
+#include "models/Student/Student.h"
+#include "models/Money/Money.h"
 
 #include "services/loop.cpp"
 

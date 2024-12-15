@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-#include "models/Money.h"
+#include "models/Money/Money.h"
 
 class BaseClass {
   protected:
@@ -20,17 +20,10 @@ class BaseClass {
 
     virtual ~BaseClass() = default;
 
-    unsigned long long getId() const {
-        return id;
-    }
+    unsigned long long getId() const;
+    unsigned long long getCourseId() const;
 
-    unsigned long long getCourseId() const {
-        return courseId;
-    }
-
-    Money getPrice() const {
-        return price;
-    }
+    Money getPrice() const;
 
     virtual bool enrollStudent(unsigned long long studentId) = 0;
     virtual bool dropStudent(unsigned long long studentId) = 0;

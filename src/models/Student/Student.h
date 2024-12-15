@@ -13,21 +13,10 @@ class Student {
   public:
     Student(unsigned long long id, std::string firstName, std::string lastName) : id(id), firstName(firstName), lastName(lastName) {}
 
-    unsigned long long getId() const {
-      return id;
-    }
-
-    std::string getFirstName() const {
-      return firstName;
-    }
-
-    std::string getLastName() const {
-      return lastName;
-    }
-
-    std::string getFullName() const {
-      return firstName + " " + lastName;
-    }
+    unsigned long long getId() const;
+    std::string getFirstName() const;
+    std::string getLastName() const;
+    std::string getFullName() const;
 };
 
 #endif // STUDENT_H

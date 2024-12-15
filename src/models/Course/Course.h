@@ -18,21 +18,10 @@ class Course {
   public:
     Course(unsigned long long id, std::string language, Level level, Intensity intensity) : id(id), language(language), level(level), intensity(intensity) {}
 
-    unsigned long long getId() const {
-      return id;
-    }
-
-    std::string getLanguage() const {
-      return language;
-    }
-
-    Level getLevel() const {
-      return level;
-    }
-
-    Intensity getIntensity() const {
-      return intensity;
-    }
+    unsigned long long getId() const;
+    std::string getLanguage() const;
+    Level getLevel() const;
+    Intensity getIntensity() const;
 };
 
 #endif // COURSE_H

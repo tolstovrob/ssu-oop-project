@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 
-#include "models/Course.h"
+#include "models/Course/Course.h"
 
 class EnrollRequest {
   private:
@@ -14,21 +14,10 @@ class EnrollRequest {
 
   public:EnrollRequest(unsigned long long id, unsigned long long courseId, std::string firstName, std::string lastName) : id(id), courseId(courseId), firstName(firstName), lastName(lastName) {}
 
-  unsigned long long getId() const {
-    return id;
-  }
-
-  unsigned long long getCourseId() const {
-    return courseId;
-  }
-
-  std::string getFirstName() const {
-    return firstName;
-  }
-
-  std::string getLastName() const {
-    return lastName;
-  }
+  unsigned long long getId() const;
+  unsigned long long getCourseId() const;
+  std::string getFirstName() const;
+  std::string getLastName() const;
 };
 
 #endif // ENROLL_H

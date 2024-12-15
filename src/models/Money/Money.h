@@ -12,14 +12,11 @@ class Money {
 
   public:
     Money(unsigned long long valueIntegral, unsigned short valueModulo) : valueIntegral(valueIntegral), valueModulo(valueModulo) {}
+    Money(unsigned long long valueIntegral) : valueIntegral(valueIntegral), valueModulo(0) {}
+    Money() : valueIntegral(0), valueModulo(0) {}
 
-    unsigned long long getValueIntegral() const {
-      return valueIntegral;
-    }
-
-    unsigned short getValueModulo() const {
-      return valueModulo;
-    }
+    unsigned long long getValueIntegral() const;
+    unsigned short getValueModulo() const;
 };
 
 #endif // MONEY_H
