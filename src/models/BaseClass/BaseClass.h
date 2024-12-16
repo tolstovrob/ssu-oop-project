@@ -7,20 +7,20 @@
 #include <vector>
 
 #include "models/Money/Money.h"
+#include "models/Identifiable/Identifiable.h"
 
-class BaseClass {
+class BaseClass : public Identifiable {
   protected:
-    unsigned long long id;
     unsigned long long courseId;
     Money price;
 
   public:
     BaseClass(unsigned long long id, unsigned long long courseId, Money price) 
-        : id(id), courseId(courseId), price(price) {}
+        : Identifiable(id), courseId(courseId), price(price) {}
 
     virtual ~BaseClass() = default;
 
-    unsigned long long getId() const;
+    unsigned long long getId() const override;
     unsigned long long getCourseId() const;
 
     Money getPrice() const;

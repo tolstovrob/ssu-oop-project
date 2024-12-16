@@ -5,15 +5,16 @@
 #include <iostream>
 #include <string>
 
-class Student {
+#include "models/Identifiable/Identifiable.h"
+
+class Student : public Identifiable {
   private:
-    unsigned long long id;
     std::string firstName, lastName;
 
   public:
-    Student(unsigned long long id, std::string firstName, std::string lastName) : id(id), firstName(firstName), lastName(lastName) {}
+    Student(unsigned long long id, std::string firstName, std::string lastName) : Identifiable(id), firstName(firstName), lastName(lastName) {}
 
-    unsigned long long getId() const;
+    unsigned long long getId() const override;
     std::string getFirstName() const;
     std::string getLastName() const;
     std::string getFullName() const;
