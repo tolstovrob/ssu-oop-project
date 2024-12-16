@@ -1,3 +1,6 @@
+echo "LOG: Clean previous build"
+rm -rf build
+
 echo "LOG: Make build directory"
 mkdir build
 
