@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <vector>
+#include <memory>
 
 #include "models/EnrollRequest/EnrollRequest.h"
 #include "models/GroupClass/GroupClass.h"
@@ -28,23 +29,17 @@ bool loop(unsigned long long iteration,
     std::cout << "Обновляем состояния..." << std::endl;
   }
 
-  unsigned long long enrollRequestCount;
-  
-  try {
-    std::cout << "Количество заявок на очередное вступление: ";
-    std::cin >> enrollRequestCount;
-  } catch (std::exception &e) {
-    error = true;
-    return error;
-  }
-  
-  for(int i = 0; i < enrollRequestCount; ++i) {
-    // EnrollRequest enrollRequest;
-    
-    // enrollRequests.push_back(enrollRequest);
-  }
+  // Courses
+  // Enrolls
+  // Students
+  // Form groups
+  // Form individual classes
+  // Accident stuff
   
   std::cout << "2 weeks have passed" << std::endl;
+  
+  // Display info
+
   return true;
 };
 
