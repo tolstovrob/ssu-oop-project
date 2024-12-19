@@ -23,6 +23,7 @@ void implementCourse(std::vector<Course> &courses) {
     std::string language;
     Level level;
     Intensity intensity;
+    Money priceGroup, priceIndividual;
 
     std::cout << "Введите язык курса: ";
     std::cin >> language;
@@ -55,7 +56,57 @@ void implementCourse(std::vector<Course> &courses) {
         }
     }
 
-    courses.emplace_back(id, language, level, intensity);
+     while (true) {
+        long whole;
+        unsigned short fraction;
+
+        std::cout << "Введите стоимость курса для групповых занятий (целая часть и дробная часть): ";
+        std::cout << "\nЦелая часть: ";
+        std::cin >> whole;
+
+        std::cout << "Дробная часть (0-99): ";
+        std::cin >> fraction;
+
+        if (std::cin.fail() || whole < 0 || fraction >= 100) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Ошибка: введите корректные значения (целая часть >= 0 и дробная часть < 100).\n";
+        } else {
+            try {
+                priceGroup = Money(whole, fraction);
+                break;
+            } catch (const std::invalid_argument& e) {
+                std::cout << "Ошибка: " << e.what() << "\n";
+            }
+        }
+    }
+
+    while (true) {
+        long whole;
+        unsigned short fraction;
+
+        std::cout << "Введите стоимость курса для индивидуальных занятий (целая и дробная части): ";
+        std::cout << "\nЦелая часть: ";
+        std::cin >> whole;
+
+        std::cout << "Дробная часть (0-99): ";
+        std::cin >> fraction;
+
+        if (std::cin.fail() || whole < 0 || fraction >= 100) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Ошибка: введите корректные значения (целая часть >= 0 и дробная часть < 100)\n";
+        } else {
+            try {
+                priceIndividual = Money(whole, fraction);
+                break;
+            } catch (const std::invalid_argument& e) {
+                std::cout << "Ошибка: " << e.what() << "\n";
+            }
+        }
+    }
+
+    courses.emplace_back(id, language, level, intensity, priceGroup, priceIndividual);
     std::cout << "Курс успешно добавлен!" << std::endl << std::endl;
 }
 
@@ -101,8 +152,9 @@ void viewCourses(const std::vector<Course> &courses) {
                   << "\n Язык: " << course.getLanguage() 
                   << "\n Уровень: " << course.getLevelString() 
                   << "\n Интенсивность: " << course.getIntensityString() 
-                  << "\n"; 
-        std::cout << "+----------------------+\t";
+                  << "\n Цена груп.: " << course.getPriceGroupString() 
+                  << "\n Цена инд.: " << course.getPriceIndividualString();
+        std::cout << "\n+----------------------+\t";
     }
     std::cout << "\n\n";
 }

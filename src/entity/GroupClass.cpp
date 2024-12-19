@@ -12,7 +12,7 @@ class GroupClass : public BaseClass {
     std::vector<unsigned long long> studentIds;
   
   public:
-    GroupClass(unsigned long long id, unsigned long long courseId, const std::vector<unsigned long long> studentIds, long wholePrice, unsigned short fractionPrice) : BaseClass(id, courseId, wholePrice, fractionPrice), studentIds(studentIds) {}
+    GroupClass(unsigned long long id, unsigned long long courseId, const std::vector<unsigned long long> studentIds) : BaseClass(id, courseId), studentIds(studentIds) {}
     ~GroupClass() override {}
 
     bool enrollStudent(unsigned long long studentId) override {

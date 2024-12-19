@@ -9,7 +9,7 @@ class IndividualClass : public BaseClass {
     unsigned long long studentId;
   
   public:
-    IndividualClass(unsigned long long id, unsigned long long courseId, unsigned long long studentId, long wholePrice, unsigned short fractionPrice) : BaseClass(id, courseId, wholePrice, fractionPrice), studentId(studentId) {}
+    IndividualClass(unsigned long long id, unsigned long long courseId, unsigned long long studentId) : BaseClass(id, courseId), studentId(studentId) {}
     ~IndividualClass() override {}
 
     bool enrollStudent(unsigned long long studentId) override {
