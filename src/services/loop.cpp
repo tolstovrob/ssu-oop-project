@@ -15,6 +15,7 @@
 
 #include "courses.cpp"
 #include "enrollRequests.cpp"
+#include "classes.cpp"
 
 #include "utils/utils.cpp"
 
@@ -46,6 +47,9 @@ bool loop(unsigned long long iteration,
   // Students
   // Form groups
   // Form individual classes
+  std::cout << std::endl << "\033[1mФОРМИРОВАНИЕ ЗАЯВОК\033[0m" << std::endl;
+  processEnrollRequests(enrollRequests, individualClasses, groupClasses);
+
   // Accident stuff
   
   std::cout << "2 weeks have passed" << std::endl;
@@ -55,4 +59,4 @@ bool loop(unsigned long long iteration,
   return true;
 };
 
-#endif // LOOP_H
+#endif // LOOP_CPP
