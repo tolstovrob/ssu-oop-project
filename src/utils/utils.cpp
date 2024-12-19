@@ -16,5 +16,12 @@ unsigned long long getFreeId(const std::vector<unsigned long long>& ids) {
   return maxId + 1;
 }
 
+void clearConsole() {
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
 
 #endif // UTILS_CPP

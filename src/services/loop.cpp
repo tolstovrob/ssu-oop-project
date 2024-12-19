@@ -28,6 +28,7 @@ bool loop(unsigned long long iteration,
           std::vector<IndividualClass> &individualClasses) {
 
   bool error = false;
+  clearConsole();
 
   std::cout << "Итерация: " << iteration << std::endl;
   if (iteration == 0) {
@@ -48,7 +49,7 @@ bool loop(unsigned long long iteration,
   // Form groups
   // Form individual classes
   std::cout << std::endl << "\033[1mФОРМИРОВАНИЕ ЗАЯВОК\033[0m" << std::endl;
-  processEnrollRequests(enrollRequests, individualClasses, groupClasses);
+  processEnrollRequests(enrollRequests, individualClasses, groupClasses, students);
 
   // Accident stuff
   

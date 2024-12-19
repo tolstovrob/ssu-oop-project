@@ -15,124 +15,240 @@
 
 #include "utils/utils.cpp"
 
-void printIndividualClasses(const std::vector<IndividualClass>& individualClasses) {
-    std::cout << "\nИндивидуальные занятия:\n";
-    std::cout << std::setw(10) << "ID" 
-              << std::setw(15) << "Курс ID" 
-              << std::setw(15) << "Студент ID" << "\n";
-    std::cout << std::string(40, '-') << "\n";
+// void printIndividualClasses(const std::vector<IndividualClass>& individualClasses) {
+//     std::cout << "\nИндивидуальные занятия:\n";
+//     std::cout << std::setw(10) << "ID" 
+//               << std::setw(15) << "Курс ID" 
+//               << std::setw(15) << "Студент ID" << "\n";
+//     std::cout << std::string(40, '-') << "\n";
 
-    for (const auto& individual : individualClasses) {
-        std::cout << std::setw(10) << individual.getId() 
-                  << std::setw(15) << individual.getCourseId() 
-                  << std::setw(15) << individual.getId() << "\n";
-    }
-}
+//     for (const auto& individual : individualClasses) {
+//         std::cout << std::setw(10) << individual.getId() 
+//                   << std::setw(15) << individual.getCourseId() 
+//                   << std::setw(15) << individual.getId() << "\n";
+//     }
+// }
 
-void printGroupClasses(const std::vector<GroupClass>& groupClasses) {
-    std::cout << "\nГрупповые занятия:\n";
-    std::cout << std::setw(10) << "ID" 
-              << std::setw(15) << "Курс ID" 
-              << std::setw(25) << "Студенты IDs" << "\n";
-    std::cout << std::string(50, '-') << "\n";
+// void printGroupClasses(const std::vector<GroupClass>& groupClasses) {
+//     std::cout << "\nГрупповые занятия:\n";
+//     std::cout << std::setw(10) << "ID" 
+//               << std::setw(15) << "Курс ID" 
+//               << std::setw(25) << "Студенты IDs" << "\n";
+//     std::cout << std::string(50, '-') << "\n";
 
-    for (const auto& group : groupClasses) {
-        std::cout << std::setw(10) << group.getId() 
-                  << std::setw(15) << group.getCourseId() 
-                  << std::setw(25);
-            std::vector<unsigned long long> groupIds;
+//     for (const auto& group : groupClasses) {
+//         std::cout << std::setw(10) << group.getId() 
+//                   << std::setw(15) << group.getCourseId() 
+//                   << std::setw(25);
+//             std::vector<unsigned long long> groupIds;
             
-            std::transform(groupClasses.begin(), groupClasses.end(), std::back_inserter(groupIds),
-                   [](const GroupClass& groupClass) { return groupClass.getId(); });
-        for (const auto& studentID : groupIds) {
-            std::cout << studentID << " ";
-        }
-        std::cout << "\n";
-    }
-}
+//             std::transform(groupClasses.begin(), groupClasses.end(), std::back_inserter(groupIds),
+//                    [](const GroupClass& groupClass) { return groupClass.getId(); });
+//         for (const auto& studentID : groupIds) {
+//             std::cout << studentID << " ";
+//         }
+//         std::cout << "\n";
+//     }
+// }
 
-void printRemainingEnrollRequests(const std::vector<EnrollRequest>& enrollRequests) {
-    if (enrollRequests.empty()) {
-        return;
-    }
+// void printRemainingEnrollRequests(const std::vector<EnrollRequest>& enrollRequests) {
+//     if (enrollRequests.empty()) {
+//         return;
+//     }
 
-    std::cout << "\nОставшиеся заявки на зачисление:\n";
-    std::cout << std::setw(10) << "ID" 
-              << std::setw(15) << "Имя" 
-              << std::setw(15) << "Фамилия" 
-              << std::setw(10) << "Курс ID" 
-              << std::setw(10) << "Инд."
-              << "\n";
-    std::cout << std::string(70, '-') << "\n";
+//     std::cout << "\nОставшиеся заявки на зачисление:\n";
+//     std::cout << std::setw(10) << "ID" 
+//               << std::setw(15) << "Имя" 
+//               << std::setw(15) << "Фамилия" 
+//               << std::setw(10) << "Курс ID" 
+//               << std::setw(10) << "Инд."
+//               << "\n";
+//     std::cout << std::string(70, '-') << "\n";
 
-    for (const auto& request : enrollRequests) {
-        std::cout << std::setw(10) << request.getId() 
-                  << std::setw(15) << request.getFirstName() 
-                  << std::setw(15) << request.getLastName() 
-                  << std::setw(10) << request.getCourseId() 
-                  << std::setw(10) << (request.getIsIndividual() ? "Да" : "Нет") 
-                  << "\n";
-    }
+//     for (const auto& request : enrollRequests) {
+//         std::cout << std::setw(10) << request.getId() 
+//                   << std::setw(15) << request.getFirstName() 
+//                   << std::setw(15) << request.getLastName() 
+//                   << std::setw(10) << request.getCourseId() 
+//                   << std::setw(10) << (request.getIsIndividual() ? "Да" : "Нет") 
+//                   << "\n";
+//     }
+// }
+
+// void processEnrollRequests(std::vector<EnrollRequest>& enrollRequests,
+//                            std::vector<IndividualClass>& individualClasses,
+//                            std::vector<GroupClass>& groupClasses) {
+//     std::vector<unsigned long long> currentGroup, individualIds, groupIds;
+//     individualIds.reserve(individualClasses.size());
+//     groupIds.reserve(groupClasses.size());
+
+//     std::transform(individualClasses.begin(), individualClasses.end(), std::back_inserter(individualIds),
+//                    [](const IndividualClass& individualClass) { return individualClass.getId(); });
+
+//     std::transform(groupClasses.begin(), groupClasses.end(), std::back_inserter(groupIds),
+//                    [](const GroupClass& groupClass) { return groupClass.getId(); });
+
+//     for (const auto& request : enrollRequests) {
+//         if (request.getIsIndividual()) {
+//             unsigned long long newID = getFreeId(individualIds);
+//             individualClasses.emplace_back(newID, request.getCourseId(), request.getId());
+//         } else {
+//             currentGroup.push_back(request.getId());
+
+//             if (currentGroup.size() >= 10) {
+//                 unsigned long long newID = getFreeId(groupIds);
+//                 groupClasses.emplace_back(newID, request.getCourseId(), currentGroup);
+                
+//                 for (size_t i = 0; i < enrollRequests.size(); ++i) {
+//                     if (std::find(currentGroup.begin(), currentGroup.end(), enrollRequests[i].getId()) != currentGroup.end()) {
+//                         enrollRequests.erase(enrollRequests.begin() + i);
+//                     }
+//                 }
+
+//                 currentGroup.clear();
+//             }
+//         }
+//     }
+
+//     if (!currentGroup.empty()) {
+//         unsigned long long newID = getFreeId(groupIds);
+
+//         for (size_t i = 0; i < enrollRequests.size(); ++i) {
+//             if (std::find(currentGroup.begin(), currentGroup.end(), enrollRequests[i].getId()) != currentGroup.end()) {
+//                 enrollRequests.erase(enrollRequests.begin() + i);
+//             }
+//         }
+
+//         if (currentGroup.size() >= 5) {
+//             groupClasses.emplace_back(newID, enrollRequests[0].getCourseId(), currentGroup);
+//         }
+//     }
+
+//     auto it = std::remove_if(enrollRequests.begin(), enrollRequests.end(),
+//                              [](const EnrollRequest& request) { return request.getIsIndividual() || request.getId() == 0; });
+
+//     enrollRequests.erase(it, enrollRequests.end());
+
+//     // Вывод информации о занятиях и оставшихся заявках
+//     printIndividualClasses(individualClasses);
+//     printGroupClasses(groupClasses);
+//     printRemainingEnrollRequests(enrollRequests);
+// }
+
+void printResults(const std::vector<IndividualClass>& individualClasses,
+                  const std::vector<GroupClass>& groupClasses,
+                  const std::vector<EnrollRequest>& remainingRequests) {
+
+   std::cout << "\nИндивидуальные занятия:\n";
+   std::cout << std::setw(10) << "ID" 
+             << std::setw(15) << "Курс ID" 
+             << std::setw(20) << "Студент ID" << "\n";
+
+   for (const auto& individual : individualClasses) {
+       std::cout << std::setw(10) << individual.getId()
+                 << std::setw(15) << individual.getCourseId()
+                 << std::setw(20) << individual.getStudentId() << "\n";
+   }
+
+   std::cout << "\nГрупповые занятия:\n";
+   std::cout << std::setw(10) << "ID" 
+             << std::setw(15) << "Курс ID" 
+             << std::setw(25) << "Студенты IDs" << "\n";
+
+   for (const auto& group : groupClasses) {
+       std::cout << std::setw(10) << group.getId()
+                 << std::setw(15) << group.getCourseId()
+                 << std::setw(25);
+
+       for (const auto& studentID : group.getStudentIds()) {
+           std::cout << studentID << " ";
+       }
+
+       std::cout << "\n";
+   }
+
+   // Вывод оставшихся заявок на зачисление
+   if (!remainingRequests.empty()) {
+       std::cout << "\nОставшиеся заявки на зачисление:\n";
+       std::cout << std::setw(10) << "ID" 
+                 << std::setw(15) << "Имя" 
+                 << std::setw(15) << "Фамилия" 
+                 << "\n";
+
+       for (const auto& request : remainingRequests) {
+           std::cout << std::setw(10) << request.getId()
+                     << std::setw(15) << request.getFirstName()
+                     << std::setw(15) << request.getLastName()
+                     << "\n";
+       }
+   }
 }
 
 void processEnrollRequests(std::vector<EnrollRequest>& enrollRequests,
                            std::vector<IndividualClass>& individualClasses,
-                           std::vector<GroupClass>& groupClasses) {
-    std::vector<unsigned long long> currentGroup, individualIds, groupIds;
-    individualIds.reserve(individualClasses.size());
-    groupIds.reserve(groupClasses.size());
+                           std::vector<GroupClass>& groupClasses,
+                           std::vector<Student>& students) {
+  clearConsole();
+  
+  if (enrollRequests.empty()) {
+    return;
+  }
 
-    std::transform(individualClasses.begin(), individualClasses.end(), std::back_inserter(individualIds),
-                   [](const IndividualClass& individualClass) { return individualClass.getId(); });
+  std::vector<unsigned long long> currentGroup, individualIds, groupIds, studentIds;
+  std::vector<EnrollRequest> approvedRequests;
+  currentGroup.reserve(10);
+  
+  std::transform(individualClasses.begin(), individualClasses.end(), std::back_inserter(individualIds),
+                 [](const IndividualClass& individualClass) { return individualClass.getId(); });
 
-    std::transform(groupClasses.begin(), groupClasses.end(), std::back_inserter(groupIds),
-                   [](const GroupClass& groupClass) { return groupClass.getId(); });
+  std::transform(groupClasses.begin(), groupClasses.end(), std::back_inserter(groupIds),
+                 [](const GroupClass& groupClass) { return groupClass.getId(); });
 
-    for (const auto& request : enrollRequests) {
-        if (request.getIsIndividual()) {
-            unsigned long long newID = getFreeId(individualIds);
-            individualClasses.emplace_back(newID, request.getCourseId(), request.getId());
-        } else {
-            currentGroup.push_back(request.getId());
+  std::transform(students.begin(), students.end(), std::back_inserter(studentIds),
+                 [](const Student& student ) { return student.getId(); });                 
 
-            if (currentGroup.size() >= 10) {
-                unsigned long long newID = getFreeId(groupIds);
-                groupClasses.emplace_back(newID, request.getCourseId(), currentGroup);
-                
-                for (size_t i = 0; i < enrollRequests.size(); ++i) {
-                    if (std::find(currentGroup.begin(), currentGroup.end(), enrollRequests[i].getId()) != currentGroup.end()) {
-                        enrollRequests.erase(enrollRequests.begin() + i);
-                    }
-                }
+  for (EnrollRequest& request : enrollRequests) {
+    std::cout << request.getFirstName() << " " << request.getLastName() << std::endl;
+    std::cin.get();
 
-                currentGroup.clear();
-            }
-        }
+    if (request.getIsIndividual()) {
+      unsigned long long newId = getFreeId(individualIds);
+      individualClasses.emplace_back(newId, request.getCourseId(), request.getId());
+      approvedRequests.push_back(request);
+
+      if (std::find(studentIds.begin(), studentIds.end(), request.getId()) != studentIds.end()) {
+        students.emplace_back(request.getId(), request.getFirstName(), request.getLastName());
+        studentIds.push_back(request.getId());
+      }
+    } else {
+      currentGroup.push_back(request.getId());
+      approvedRequests.push_back(request);
+
+
+      if (std::find(studentIds.begin(), studentIds.end(), request.getId()) != studentIds.end()) {
+        students.emplace_back(request.getId(), request.getFirstName(), request.getLastName());
+        studentIds.push_back(request.getId());
+      }
+
+      if (currentGroup.size() == 7) {
+        unsigned long long newId = getFreeId(groupIds);
+        groupClasses.emplace_back(newId, request.getCourseId(), currentGroup);
+        groupIds.push_back(newId);
+        currentGroup.clear();
+      }
     }
+  }
 
-    if (!currentGroup.empty()) {
-        unsigned long long newID = getFreeId(groupIds);
+  enrollRequests.erase(std::remove_if(enrollRequests.begin(), enrollRequests.end(),
+                                      [&approvedRequests](const EnrollRequest& request) {
+                                          return std::any_of(approvedRequests.begin(), approvedRequests.end(),
+                                                            [&request](const EnrollRequest& approvedRequest) {
+                                                                return approvedRequest.getId() == request.getId();
+                                                            });
+                                      }),
+                         enrollRequests.end());
 
-        for (size_t i = 0; i < enrollRequests.size(); ++i) {
-            if (std::find(currentGroup.begin(), currentGroup.end(), enrollRequests[i].getId()) != currentGroup.end()) {
-                enrollRequests.erase(enrollRequests.begin() + i);
-            }
-        }
-
-        if (currentGroup.size() >= 5) {
-            groupClasses.emplace_back(newID, enrollRequests[0].getCourseId(), currentGroup);
-        }
-    }
-
-    auto it = std::remove_if(enrollRequests.begin(), enrollRequests.end(),
-                             [](const EnrollRequest& request) { return request.getIsIndividual() || request.getId() == 0; });
-
-    enrollRequests.erase(it, enrollRequests.end());
-
-    // Вывод информации о занятиях и оставшихся заявках
-    printIndividualClasses(individualClasses);
-    printGroupClasses(groupClasses);
-    printRemainingEnrollRequests(enrollRequests);
+  printResults(individualClasses, groupClasses, enrollRequests);
 }
 
 

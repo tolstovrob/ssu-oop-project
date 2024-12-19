@@ -31,6 +31,7 @@ int main() {
     if (!loop(iteration, courses, enrollRequests, students, groupClasses, individualClasses)) {
       break;
     };
+    ++iteration;
     std::cin.get();
   }
 

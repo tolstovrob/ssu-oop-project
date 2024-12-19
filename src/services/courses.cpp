@@ -160,36 +160,37 @@ void viewCourses(const std::vector<Course> &courses) {
 }
 
 void manageCourses(std::vector<Course> &courses) {
-    char choice;
+  clearConsole();
+  char choice;
 
-    do {
-        std::cout << "Выберите действие:\n";
-        std::cout << "1. Добавить курс\n";
-        std::cout << "2. Удалить курс\n";
-        std::cout << "3. Просмотреть все курсы\n";
-        std::cout << "4. Выход\n";
+  do {
+      std::cout << "Выберите действие:\n";
+      std::cout << "1. Добавить курс\n";
+      std::cout << "2. Удалить курс\n";
+      std::cout << "3. Просмотреть все курсы\n";
+      std::cout << "4. Выход\n";
 
-        std::cout << ">>> ";
-        std::cin >> choice;
+      std::cout << ">>> ";
+      std::cin >> choice;
 
-        switch (choice) {
-            case '1':
-                implementCourse(courses);
-                break;
-            case '2':
-                deleteCourse(courses);
-                break;
-            case '3':
-                viewCourses(courses);
-                break;
-            case '4':
-                return;
-            default:
-                std::cout << "Некорректный выбор. Пожалуйста, выберите снова" << std::endl;
-                break;
-        }
+      switch (choice) {
+          case '1':
+              implementCourse(courses);
+              break;
+          case '2':
+              deleteCourse(courses);
+              break;
+          case '3':
+              viewCourses(courses);
+              break;
+          case '4':
+              return;
+          default:
+              std::cout << "Некорректный выбор. Пожалуйста, выберите снова" << std::endl;
+              break;
+      }
 
-    } while (true);
+  } while (true);
 }
 
 #endif // COURSES_CPP

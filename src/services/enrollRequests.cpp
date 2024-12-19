@@ -87,21 +87,22 @@ void viewEnrollRequests(const std::vector<EnrollRequest> &enrollRequests) {
         return;
     }
 
-    for (const auto& request : enrollRequests) {
-        std::cout << "+-----------------------------+\n";
-        std::cout << "| ID заявки: " << request.getId() 
-                  << "\n| Имя: " << request.getFirstName() 
-                  << "\n| Фамилия: " << request.getLastName() 
-                  << "\n| ID курса: " << request.getCourseId() 
-                  << "\n| Индивидуальная запись: " 
-                  << (request.getIsIndividual() ? "Да" : "Нет") 
-                  << "\n+-----------------------------+\n";
-    }
+  for (const auto& request : enrollRequests) {
+    std::cout << "+-----------------------------+\n";
+    std::cout << "| ID заявки: " << request.getId() 
+              << "\n| Имя: " << request.getFirstName() 
+              << "\n| Фамилия: " << request.getLastName() 
+              << "\n| ID курса: " << request.getCourseId() 
+              << "\n| Индивидуальная запись: " 
+              << (request.getIsIndividual() ? "Да" : "Нет") 
+              << "\n+-----------------------------+\n";
+  }
 
     std::cout << "\n";
 }
 
 void manageEnrollRequests(std::vector<EnrollRequest> &enrollRequests, const std::vector<Course> &courses) {
+    clearConsole();
     char choice;
 
     do {
