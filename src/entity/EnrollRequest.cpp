@@ -17,6 +17,10 @@ class EnrollRequest : public Student {
     unsigned long long getCourseId() const {
       return courseId;
     }
+
+    bool getIsIndividual() const {
+      return isIndividual;
+    }
 };
 
 #endif // ENROLLREQUEST_CPP
