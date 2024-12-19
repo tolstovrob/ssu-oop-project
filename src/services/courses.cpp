@@ -111,12 +111,13 @@ void manageCourses(std::vector<Course> &courses) {
     char choice;
 
     do {
-        std::cout << "\nВыберите действие:\n";
+        std::cout << "Выберите действие:\n";
         std::cout << "1. Добавить курс\n";
         std::cout << "2. Удалить курс\n";
         std::cout << "3. Просмотреть все курсы\n";
         std::cout << "4. Выход\n";
 
+        std::cout << ">>> ";
         std::cin >> choice;
 
         switch (choice) {

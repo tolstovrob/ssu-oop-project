@@ -33,9 +33,6 @@ void implementEnrollRequest(std::vector<EnrollRequest> &enrollRequests, const st
     std::cout << "Введите фамилию студента: ";
     std::cin >> lastName;
 
-    std::cout << "Введите ID курса: ";
-    std::cin >> courseId;
-
     while (true) {
       std::cout << "Введите ID курса: ";
       std::cin >> courseId;
@@ -108,12 +105,13 @@ void manageEnrollRequests(std::vector<EnrollRequest> &enrollRequests, const std:
     char choice;
 
     do {
-        std::cout << "\nВыберите действие:\n";
+        std::cout << "Выберите действие:\n";
         std::cout << "1. Добавить запрос на зачисление\n";
         std::cout << "2. Удалить запрос на зачисление\n";
         std::cout << "3. Просмотреть все запросы\n";
         std::cout << "4. Выход\n";
 
+        std::cout << ">>> ";
         std::cin >> choice;
 
         switch (choice) {
