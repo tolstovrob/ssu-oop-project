@@ -15,6 +15,10 @@ class GroupClass : public BaseClass {
     GroupClass(unsigned long long id, unsigned long long courseId, const std::vector<unsigned long long> studentIds) : BaseClass(id, courseId), studentIds(studentIds) {}
     ~GroupClass() override {}
 
+    std::vector<unsigned long long> getStudentIds() const {
+      return studentIds;
+    }
+
     bool enrollStudent(unsigned long long studentId) override {
       if (std::find(studentIds.begin(), studentIds.end(), studentId) == studentIds.end()) {
         studentIds.push_back(studentId);

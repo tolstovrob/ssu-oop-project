@@ -12,6 +12,10 @@ class IndividualClass : public BaseClass {
     IndividualClass(unsigned long long id, unsigned long long courseId, unsigned long long studentId) : BaseClass(id, courseId), studentId(studentId) {}
     ~IndividualClass() override {}
 
+    unsigned long long getStudentId() const {
+      return studentId;
+    }
+
     bool enrollStudent(unsigned long long studentId) override {
       if (this->studentId == studentId) {
         return false;
