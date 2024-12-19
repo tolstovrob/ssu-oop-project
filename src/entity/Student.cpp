@@ -12,7 +12,7 @@ class Student : public Identifiable {
 
   public:
     Student(unsigned long long id, const std::string firstName, const std::string lastName) : Identifiable(id), firstName(firstName), lastName(lastName) {}
-    ~Student() override {}
+    virtual ~Student() {}
 
     const std::string getFirstName() const {
       return firstName;

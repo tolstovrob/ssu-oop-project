@@ -12,7 +12,7 @@ class BaseClass : public Identifiable {
 
   public:
     BaseClass(unsigned long long id, unsigned long long courseId, long wholePrice, unsigned short fractionPrice) : Identifiable(id), courseId(courseId), price(wholePrice, fractionPrice) {}
-    ~BaseClass() override {}
+    virtual ~BaseClass() {}
 
     unsigned long long getCourseId() const {
       return courseId;
@@ -22,9 +22,9 @@ class BaseClass : public Identifiable {
       return price;
     }
 
-    virtual bool enrollStudent(unsigned long long studentId);
-    virtual bool dropStudent(unsigned long long studentId);
-    virtual bool isStudentEnrolled(unsigned long long studentId) const;
+    virtual bool enrollStudent(unsigned long long studentId) = 0;
+    virtual bool dropStudent(unsigned long long studentId) = 0;
+    virtual bool isStudentEnrolled(unsigned long long studentId) const = 0;
 };
 
 #endif // BASECLASS_CPP
