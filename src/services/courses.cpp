@@ -107,23 +107,6 @@ void viewCourses(const std::vector<Course> &courses) {
     std::cout << "\n\n";
 }
 
-unsigned long long formCourses(std::vector<Course> &courses) {
-    char choice;
-
-    do {
-        implementCourse(courses);
-        std::cout << "Хотите добавить ещё курс? (y/n): ";
-        std::cin >> choice;
-        
-        if (choice != 'y' && choice != 'Y') break;
-
-    } while (true);
-
-    return courses.size();
-}
-
-
-
 void manageCourses(std::vector<Course> &courses) {
     char choice;
 
