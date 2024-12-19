@@ -49,7 +49,7 @@ bool loop(unsigned long long iteration,
   // Form groups
   // Form individual classes
   std::cout << std::endl << "\033[1mФОРМИРОВАНИЕ ЗАЯВОК\033[0m" << std::endl;
-  processEnrollRequests(enrollRequests, individualClasses, groupClasses, students);
+  processEnrollRequests(enrollRequests, individualClasses, groupClasses, students, courses);
 
   // Accident stuff
   
