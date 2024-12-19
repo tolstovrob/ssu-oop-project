@@ -14,6 +14,7 @@
 #include "entity/IndividualClass.cpp"
 
 #include "courses.cpp"
+#include "enrollRequests.cpp"
 
 #include "utils/utils.cpp"
 
@@ -39,6 +40,9 @@ bool loop(unsigned long long iteration,
   manageCourses(courses);
 
   // Enrolls
+  std::cout << std::endl << "\033[1mУПРАВЛЕНИЕ ЗАЯВКАМИ\033[0m" << std::endl;
+  manageEnrollRequests(enrollRequests, courses);
+
   // Students
   // Form groups
   // Form individual classes
