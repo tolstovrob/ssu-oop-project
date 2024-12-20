@@ -92,9 +92,8 @@ void processEnrollRequests(std::vector<EnrollRequest>& enrollRequests,
   std::transform(courses.begin(), courses.end(), std::back_inserter(courseIds),
                  [](const Course& course ) { return course.getId(); });           
 
-  std::map<unsigned long long, std::vector<Student>> groupBuffer;
   std::vector<EnrollRequest> approvedRequests;
-  std::map<unsigned long long, std::vector<EnrollRequest>> approvedRequestsBuffer;
+  std::map<unsigned long long, std::vector<EnrollRequest>> groupBuffer, approvedRequestsBuffer;
 
   for (EnrollRequest& request : enrollRequests) {
     if (request.getIsIndividual()) {
@@ -134,46 +133,55 @@ void processEnrollRequests(std::vector<EnrollRequest>& enrollRequests,
     }
   }
 
+  enrollRequests.erase(std::remove_if(enrollRequests.begin(), enrollRequests.end(),
+                                        [&approvedRequests](const EnrollRequest& request) {
+                                            return std::any_of(approvedRequests.begin(), approvedRequests.end(),
+                                                              [&request](const EnrollRequest& approvedRequest) {
+                                                                  return approvedRequest.getId() == request.getId();
+                                                              });
+                                        }),
+                        enrollRequests.end());
+
   for (auto it_buff = groupBuffer.begin(); it_buff != groupBuffer.end(); ++it_buff) {
-    std::vector<GroupClass> filteredGroups;
-    if (filteredGroups.size() == 0) {
-      continue;
-    }
+    unsigned long long courseId = it_buff->first;
 
-    unsigned long long targetCourseId = it_buff->first;
+    if (groupBuffer[courseId].size() >= 5) {
+      std::vector<unsigned long long> studentIds;      
+      for (auto student : groupBuffer[courseId]) {
+        studentIds.push_back(student.getId());
+      }
+      
+      for (auto studentId : studentIds) {
+         enrollRequests.erase(std::remove_if(enrollRequests.begin(), enrollRequests.end(),
+                              [studentId](const EnrollRequest& request) {
+                                return request.getId() == studentId;
+                              }),
+                            enrollRequests.end());
+      }
 
-    std::copy_if(groupClasses.begin(), groupClasses.end(), std::back_inserter(filteredGroups),
-                 [targetCourseId](const GroupClass& group) {
-                     return group.getCourseId() == targetCourseId;
-                 });
+      groupClasses.emplace_back(getFreeId(groupIds), courseId, studentIds);
+    } else {
+      while (!groupBuffer[courseId].empty()) {
+        for (auto group : groupClasses) {
+          if (group.getCourseId() == courseId && !groupBuffer[courseId].empty()) {
+            unsigned long long studentId = groupBuffer[courseId].back().getId();
+            group.enrollStudent(studentId);
 
-    while (!groupBuffer[targetCourseId].empty()) {
-      std::cout << groupBuffer.size() << filteredGroups.size() <<  std::endl;
-      for (auto it_group = filteredGroups.begin(); it_group != filteredGroups.end(); ++it_group) {
-          unsigned long long studentId = groupBuffer[targetCourseId].back().getId();
-          it_group->enrollStudent(studentId);
-
-          groupBuffer[targetCourseId].pop_back();
-
-          if (groupBuffer[targetCourseId].empty()) {
-              break;
+            enrollRequests.erase(std::remove_if(enrollRequests.begin(), enrollRequests.end(),
+                                  [studentId](const EnrollRequest& request) {
+                                    return request.getId() == studentId;
+                                  }),
+                                enrollRequests.end());
+            
+            groupBuffer[courseId].pop_back();
           }
+        }
       }
     }
-}
-
-  enrollRequests.erase(std::remove_if(enrollRequests.begin(), enrollRequests.end(),
-                                         [&approvedRequests](const EnrollRequest& request) {
-                                             return std::any_of(approvedRequests.begin(), approvedRequests.end(),
-                                                                [&request](const EnrollRequest& approvedRequest) {
-                                                                    return approvedRequest.getId() == request.getId();
-                                                                });
-                                         }),
-                         enrollRequests.end());
+  }
 
   printResults(individualClasses, groupClasses, enrollRequests);
   std::cin.get();
 }
-
 
 #endif // CLASSES_CPP
