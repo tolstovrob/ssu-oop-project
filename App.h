@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Course.h"
+#include "EnrollRequest.h"
 
 namespace CourseManagement {
 
@@ -19,6 +20,18 @@ namespace CourseManagement {
 	{
 	private: 
 		List<Course^>^ courses;
+	private: System::Windows::Forms::ErrorProvider^ AddEnrollRequestFirstNameErrorProvider;
+	private: System::Windows::Forms::ErrorProvider^ AddEnrollRequestLastNameErrorProvider;
+	private: System::Windows::Forms::ErrorProvider^ AddEnrollRequestCourseIDErrorProvider;
+	private: System::Windows::Forms::ErrorProvider^ AddEnrollRequestTypeErrorProvider;
+	private: System::Windows::Forms::ErrorProvider^ DeleteEnrollRequestErrorProvider;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ LastName;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ FirstName;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ CourseID;
+	private: System::Windows::Forms::DataGridViewComboBoxColumn^ Type;
+
+		   List<EnrollRequest^>^ enrollRequests;
 
 	public:
 		App(void)
@@ -26,6 +39,7 @@ namespace CourseManagement {
 			InitializeComponent();
 
 			courses = gcnew List<Course^>();
+			enrollRequests = gcnew List<EnrollRequest^>();
 		}
 
 	protected:
@@ -76,16 +90,25 @@ namespace CourseManagement {
 
 
 	private: System::Windows::Forms::GroupBox^ AddEnrollRequestGroup;
+	private: System::Windows::Forms::Button^ AddEnrollRequestResetButton;
+
+	private: System::Windows::Forms::Button^ AddEnrollRequestAddButton;
+	private: System::Windows::Forms::TextBox^ AddEnrollRequestFirstNameTextbox;
+	private: System::Windows::Forms::Label^ AddEnrollRequestLabel;
 
 
-	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::Button^ button2;
 
 
 
 
-	private: System::Windows::Forms::TextBox^ textBox1;
-	private: System::Windows::Forms::Label^ label3;
+
+
+
+
+
+
+
+
 	private: System::Windows::Forms::GroupBox^ DeleteEnrollRequestGroup;
 	private: System::Windows::Forms::Button^ DeleteEnrollRequestButton;
 
@@ -93,25 +116,32 @@ namespace CourseManagement {
 	private: System::Windows::Forms::TextBox^ DeleteEnrollRequestTextbox;
 
 	private: System::Windows::Forms::Label^ DeleteEnrollRequestLabel;
-	private: System::Windows::Forms::TextBox^ textBox2;
-	private: System::Windows::Forms::ComboBox^ comboBox3;
-	private: System::Windows::Forms::TextBox^ textBox3;
-	private: System::Windows::Forms::Label^ label4;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ LastName;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ FirstName;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ CourseID;
-	private: System::Windows::Forms::DataGridViewComboBoxColumn^ Type;
+	private: System::Windows::Forms::TextBox^ AddEnrollRequestLastNameTextbox;
+
+	private: System::Windows::Forms::ComboBox^ AddEnrollRequestTypeCombobox;
+
+	private: System::Windows::Forms::TextBox^ AddEnrollRequestCourseIDTextbox;
+
+
+
+
+	private: System::Windows::Forms::Label^ CourseIDLabel;
+
+
+
+
+
+
 	private: System::Windows::Forms::TabControl^ AppTabWrapper;
 	private: System::Windows::Forms::TabPage^ CoursesTab;
 	private: System::Windows::Forms::TabPage^ EnrollRequestsTab;
 	private: System::Windows::Forms::TabPage^ StudentsTab;
 	private: System::Windows::Forms::TabPage^ IndividualTab;
 	private: System::Windows::Forms::TabPage^ GroupTabs;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^ ID;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^ Language;
-private: System::Windows::Forms::DataGridViewComboBoxColumn^ Level;
-private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ID;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Language;
+	private: System::Windows::Forms::DataGridViewComboBoxColumn^ Level;
+	private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 	private: System::Windows::Forms::Label^ TitleLabel;
 
 
@@ -157,20 +187,15 @@ private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 			this->AddCourseIntensityErrorProvider = (gcnew System::Windows::Forms::ErrorProvider(this->components));
 			this->DeleteCourseErrorProvider = (gcnew System::Windows::Forms::ErrorProvider(this->components));
 			this->EnrollRequestsTable = (gcnew System::Windows::Forms::DataGridView());
-			this->dataGridViewTextBoxColumn1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->LastName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->FirstName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->CourseID = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Type = (gcnew System::Windows::Forms::DataGridViewComboBoxColumn());
 			this->AddEnrollRequestGroup = (gcnew System::Windows::Forms::GroupBox());
-			this->comboBox3 = (gcnew System::Windows::Forms::ComboBox());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->AddEnrollRequestTypeCombobox = (gcnew System::Windows::Forms::ComboBox());
+			this->AddEnrollRequestCourseIDTextbox = (gcnew System::Windows::Forms::TextBox());
+			this->CourseIDLabel = (gcnew System::Windows::Forms::Label());
+			this->AddEnrollRequestLastNameTextbox = (gcnew System::Windows::Forms::TextBox());
+			this->AddEnrollRequestResetButton = (gcnew System::Windows::Forms::Button());
+			this->AddEnrollRequestAddButton = (gcnew System::Windows::Forms::Button());
+			this->AddEnrollRequestFirstNameTextbox = (gcnew System::Windows::Forms::TextBox());
+			this->AddEnrollRequestLabel = (gcnew System::Windows::Forms::Label());
 			this->DeleteEnrollRequestGroup = (gcnew System::Windows::Forms::GroupBox());
 			this->DeleteEnrollRequestButton = (gcnew System::Windows::Forms::Button());
 			this->DeleteEnrollRequestTextbox = (gcnew System::Windows::Forms::TextBox());
@@ -182,6 +207,16 @@ private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 			this->IndividualTab = (gcnew System::Windows::Forms::TabPage());
 			this->GroupTabs = (gcnew System::Windows::Forms::TabPage());
 			this->TitleLabel = (gcnew System::Windows::Forms::Label());
+			this->AddEnrollRequestFirstNameErrorProvider = (gcnew System::Windows::Forms::ErrorProvider(this->components));
+			this->AddEnrollRequestLastNameErrorProvider = (gcnew System::Windows::Forms::ErrorProvider(this->components));
+			this->AddEnrollRequestCourseIDErrorProvider = (gcnew System::Windows::Forms::ErrorProvider(this->components));
+			this->AddEnrollRequestTypeErrorProvider = (gcnew System::Windows::Forms::ErrorProvider(this->components));
+			this->DeleteEnrollRequestErrorProvider = (gcnew System::Windows::Forms::ErrorProvider(this->components));
+			this->dataGridViewTextBoxColumn1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->LastName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->FirstName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->CourseID = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Type = (gcnew System::Windows::Forms::DataGridViewComboBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->CoursesTable))->BeginInit();
 			this->AddCourseForm->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AddCourseLanguageErrorProvider))->BeginInit();
@@ -195,6 +230,11 @@ private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 			this->AppTabWrapper->SuspendLayout();
 			this->CoursesTab->SuspendLayout();
 			this->EnrollRequestsTab->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AddEnrollRequestFirstNameErrorProvider))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AddEnrollRequestLastNameErrorProvider))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AddEnrollRequestCourseIDErrorProvider))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AddEnrollRequestTypeErrorProvider))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DeleteEnrollRequestErrorProvider))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// WeekLabel
@@ -232,7 +272,7 @@ private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 					this->Level, this->Intensity
 			});
 			this->CoursesTable->EnableHeadersVisualStyles = false;
-			this->CoursesTable->Location = System::Drawing::Point(44, 45);
+			this->CoursesTable->Location = System::Drawing::Point(50, 50);
 			this->CoursesTable->Name = L"CoursesTable";
 			this->CoursesTable->ReadOnly = true;
 			this->CoursesTable->RowHeadersVisible = false;
@@ -303,7 +343,7 @@ private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 			this->AddCourseForm->Controls->Add(this->AddCourseLanguageLabel);
 			this->AddCourseForm->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 8.249999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->AddCourseForm->Location = System::Drawing::Point(709, 45);
+			this->AddCourseForm->Location = System::Drawing::Point(709, 50);
 			this->AddCourseForm->Name = L"AddCourseForm";
 			this->AddCourseForm->Size = System::Drawing::Size(539, 169);
 			this->AddCourseForm->TabIndex = 5;
@@ -408,7 +448,7 @@ private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 			this->DeleteCourseGroup->Controls->Add(this->DeleteCourseLabel);
 			this->DeleteCourseGroup->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 8.249999F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->DeleteCourseGroup->Location = System::Drawing::Point(709, 230);
+			this->DeleteCourseGroup->Location = System::Drawing::Point(709, 225);
 			this->DeleteCourseGroup->Name = L"DeleteCourseGroup";
 			this->DeleteCourseGroup->Size = System::Drawing::Size(539, 87);
 			this->DeleteCourseGroup->TabIndex = 12;
@@ -466,148 +506,115 @@ private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 					this->LastName, this->FirstName, this->CourseID, this->Type
 			});
 			this->EnrollRequestsTable->EnableHeadersVisualStyles = false;
-			this->EnrollRequestsTable->Location = System::Drawing::Point(30, 25);
+			this->EnrollRequestsTable->Location = System::Drawing::Point(50, 50);
 			this->EnrollRequestsTable->Name = L"EnrollRequestsTable";
 			this->EnrollRequestsTable->ReadOnly = true;
 			this->EnrollRequestsTable->RowHeadersVisible = false;
 			this->EnrollRequestsTable->Size = System::Drawing::Size(573, 508);
 			this->EnrollRequestsTable->TabIndex = 13;
 			// 
-			// dataGridViewTextBoxColumn1
-			// 
-			this->dataGridViewTextBoxColumn1->FillWeight = 50;
-			this->dataGridViewTextBoxColumn1->HeaderText = L"ID";
-			this->dataGridViewTextBoxColumn1->Name = L"dataGridViewTextBoxColumn1";
-			this->dataGridViewTextBoxColumn1->ReadOnly = true;
-			this->dataGridViewTextBoxColumn1->Width = 50;
-			// 
-			// LastName
-			// 
-			this->LastName->HeaderText = L"Фамилия";
-			this->LastName->Name = L"LastName";
-			this->LastName->ReadOnly = true;
-			this->LastName->Width = 150;
-			// 
-			// FirstName
-			// 
-			this->FirstName->HeaderText = L"Имя";
-			this->FirstName->Name = L"FirstName";
-			this->FirstName->ReadOnly = true;
-			this->FirstName->Width = 150;
-			// 
-			// CourseID
-			// 
-			this->CourseID->HeaderText = L"ID курса";
-			this->CourseID->Name = L"CourseID";
-			this->CourseID->ReadOnly = true;
-			this->CourseID->Width = 120;
-			// 
-			// Type
-			// 
-			this->Type->HeaderText = L"Тип";
-			this->Type->Name = L"Type";
-			this->Type->ReadOnly = true;
-			// 
 			// AddEnrollRequestGroup
 			// 
-			this->AddEnrollRequestGroup->Controls->Add(this->comboBox3);
-			this->AddEnrollRequestGroup->Controls->Add(this->textBox3);
-			this->AddEnrollRequestGroup->Controls->Add(this->label4);
-			this->AddEnrollRequestGroup->Controls->Add(this->textBox2);
-			this->AddEnrollRequestGroup->Controls->Add(this->button1);
-			this->AddEnrollRequestGroup->Controls->Add(this->button2);
-			this->AddEnrollRequestGroup->Controls->Add(this->textBox1);
-			this->AddEnrollRequestGroup->Controls->Add(this->label3);
+			this->AddEnrollRequestGroup->Controls->Add(this->AddEnrollRequestTypeCombobox);
+			this->AddEnrollRequestGroup->Controls->Add(this->AddEnrollRequestCourseIDTextbox);
+			this->AddEnrollRequestGroup->Controls->Add(this->CourseIDLabel);
+			this->AddEnrollRequestGroup->Controls->Add(this->AddEnrollRequestLastNameTextbox);
+			this->AddEnrollRequestGroup->Controls->Add(this->AddEnrollRequestResetButton);
+			this->AddEnrollRequestGroup->Controls->Add(this->AddEnrollRequestAddButton);
+			this->AddEnrollRequestGroup->Controls->Add(this->AddEnrollRequestFirstNameTextbox);
+			this->AddEnrollRequestGroup->Controls->Add(this->AddEnrollRequestLabel);
 			this->AddEnrollRequestGroup->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 8.249999F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->AddEnrollRequestGroup->Location = System::Drawing::Point(666, 159);
+			this->AddEnrollRequestGroup->Location = System::Drawing::Point(666, 50);
 			this->AddEnrollRequestGroup->Name = L"AddEnrollRequestGroup";
 			this->AddEnrollRequestGroup->Size = System::Drawing::Size(573, 169);
 			this->AddEnrollRequestGroup->TabIndex = 11;
 			this->AddEnrollRequestGroup->TabStop = false;
 			this->AddEnrollRequestGroup->Text = L"Добавить заявку на обучение";
 			// 
-			// comboBox3
+			// AddEnrollRequestTypeCombobox
 			// 
-			this->comboBox3->Font = (gcnew System::Drawing::Font(L"JetBrains Mono", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->AddEnrollRequestTypeCombobox->Font = (gcnew System::Drawing::Font(L"JetBrains Mono", 14.25F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->AddEnrollRequestTypeCombobox->FormattingEnabled = true;
+			this->AddEnrollRequestTypeCombobox->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Индивидуальное", L"Групповое" });
+			this->AddEnrollRequestTypeCombobox->Location = System::Drawing::Point(329, 60);
+			this->AddEnrollRequestTypeCombobox->Name = L"AddEnrollRequestTypeCombobox";
+			this->AddEnrollRequestTypeCombobox->Size = System::Drawing::Size(220, 33);
+			this->AddEnrollRequestTypeCombobox->TabIndex = 13;
+			// 
+			// AddEnrollRequestCourseIDTextbox
+			// 
+			this->AddEnrollRequestCourseIDTextbox->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 14.25F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->AddEnrollRequestCourseIDTextbox->Location = System::Drawing::Point(104, 60);
+			this->AddEnrollRequestCourseIDTextbox->Name = L"AddEnrollRequestCourseIDTextbox";
+			this->AddEnrollRequestCourseIDTextbox->Size = System::Drawing::Size(219, 33);
+			this->AddEnrollRequestCourseIDTextbox->TabIndex = 11;
+			// 
+			// CourseIDLabel
+			// 
+			this->CourseIDLabel->AutoSize = true;
+			this->CourseIDLabel->Font = (gcnew System::Drawing::Font(L"JetBrains Mono", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->comboBox3->FormattingEnabled = true;
-			this->comboBox3->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Индивидуальное", L"Групповое" });
-			this->comboBox3->Location = System::Drawing::Point(329, 60);
-			this->comboBox3->Name = L"comboBox3";
-			this->comboBox3->Size = System::Drawing::Size(220, 33);
-			this->comboBox3->TabIndex = 13;
+			this->CourseIDLabel->Location = System::Drawing::Point(18, 69);
+			this->CourseIDLabel->Name = L"CourseIDLabel";
+			this->CourseIDLabel->Size = System::Drawing::Size(80, 17);
+			this->CourseIDLabel->TabIndex = 10;
+			this->CourseIDLabel->Text = L"ID курса:";
 			// 
-			// textBox3
+			// AddEnrollRequestLastNameTextbox
 			// 
-			this->textBox3->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->AddEnrollRequestLastNameTextbox->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 14.25F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->AddEnrollRequestLastNameTextbox->Location = System::Drawing::Point(329, 20);
+			this->AddEnrollRequestLastNameTextbox->Name = L"AddEnrollRequestLastNameTextbox";
+			this->AddEnrollRequestLastNameTextbox->Size = System::Drawing::Size(220, 33);
+			this->AddEnrollRequestLastNameTextbox->TabIndex = 12;
+			// 
+			// AddEnrollRequestResetButton
+			// 
+			this->AddEnrollRequestResetButton->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 12, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->AddEnrollRequestResetButton->Location = System::Drawing::Point(21, 106);
+			this->AddEnrollRequestResetButton->Name = L"AddEnrollRequestResetButton";
+			this->AddEnrollRequestResetButton->Size = System::Drawing::Size(257, 45);
+			this->AddEnrollRequestResetButton->TabIndex = 10;
+			this->AddEnrollRequestResetButton->Text = L"Очистить форму";
+			this->AddEnrollRequestResetButton->UseVisualStyleBackColor = true;
+			this->AddEnrollRequestResetButton->Click += gcnew System::EventHandler(this, &App::AddEnrollRequestResetButton_Click);
+			// 
+			// AddEnrollRequestAddButton
+			// 
+			this->AddEnrollRequestAddButton->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 12, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->AddEnrollRequestAddButton->Location = System::Drawing::Point(292, 106);
+			this->AddEnrollRequestAddButton->Name = L"AddEnrollRequestAddButton";
+			this->AddEnrollRequestAddButton->Size = System::Drawing::Size(257, 45);
+			this->AddEnrollRequestAddButton->TabIndex = 9;
+			this->AddEnrollRequestAddButton->Text = L"Добавить заявку";
+			this->AddEnrollRequestAddButton->UseVisualStyleBackColor = true;
+			this->AddEnrollRequestAddButton->Click += gcnew System::EventHandler(this, &App::AddEnrollRequestAddButton_Click);
+			// 
+			// AddEnrollRequestFirstNameTextbox
+			// 
+			this->AddEnrollRequestFirstNameTextbox->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 14.25F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->AddEnrollRequestFirstNameTextbox->Location = System::Drawing::Point(56, 21);
+			this->AddEnrollRequestFirstNameTextbox->Name = L"AddEnrollRequestFirstNameTextbox";
+			this->AddEnrollRequestFirstNameTextbox->Size = System::Drawing::Size(267, 33);
+			this->AddEnrollRequestFirstNameTextbox->TabIndex = 4;
+			// 
+			// AddEnrollRequestLabel
+			// 
+			this->AddEnrollRequestLabel->AutoSize = true;
+			this->AddEnrollRequestLabel->Font = (gcnew System::Drawing::Font(L"JetBrains Mono", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->textBox3->Location = System::Drawing::Point(104, 60);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(219, 33);
-			this->textBox3->TabIndex = 11;
-			// 
-			// label4
-			// 
-			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"JetBrains Mono", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label4->Location = System::Drawing::Point(18, 69);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(80, 17);
-			this->label4->TabIndex = 10;
-			this->label4->Text = L"ID курса:";
-			// 
-			// textBox2
-			// 
-			this->textBox2->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->textBox2->Location = System::Drawing::Point(329, 20);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(220, 33);
-			this->textBox2->TabIndex = 12;
-			// 
-			// button1
-			// 
-			this->button1->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->button1->Location = System::Drawing::Point(21, 106);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(257, 45);
-			this->button1->TabIndex = 10;
-			this->button1->Text = L"Очистить форму";
-			this->button1->UseVisualStyleBackColor = true;
-			// 
-			// button2
-			// 
-			this->button2->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->button2->Location = System::Drawing::Point(292, 106);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(257, 45);
-			this->button2->TabIndex = 9;
-			this->button2->Text = L"Добавить заявку";
-			this->button2->UseVisualStyleBackColor = true;
-			// 
-			// textBox1
-			// 
-			this->textBox1->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->textBox1->Location = System::Drawing::Point(56, 21);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(267, 33);
-			this->textBox1->TabIndex = 4;
-			// 
-			// label3
-			// 
-			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"JetBrains Mono", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label3->Location = System::Drawing::Point(18, 29);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(32, 17);
-			this->label3->TabIndex = 3;
-			this->label3->Text = L"ФИ:";
+			this->AddEnrollRequestLabel->Location = System::Drawing::Point(18, 29);
+			this->AddEnrollRequestLabel->Name = L"AddEnrollRequestLabel";
+			this->AddEnrollRequestLabel->Size = System::Drawing::Size(32, 17);
+			this->AddEnrollRequestLabel->TabIndex = 3;
+			this->AddEnrollRequestLabel->Text = L"ФИ:";
 			// 
 			// DeleteEnrollRequestGroup
 			// 
@@ -616,7 +623,7 @@ private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 			this->DeleteEnrollRequestGroup->Controls->Add(this->DeleteEnrollRequestLabel);
 			this->DeleteEnrollRequestGroup->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 8.249999F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->DeleteEnrollRequestGroup->Location = System::Drawing::Point(666, 51);
+			this->DeleteEnrollRequestGroup->Location = System::Drawing::Point(666, 225);
 			this->DeleteEnrollRequestGroup->Name = L"DeleteEnrollRequestGroup";
 			this->DeleteEnrollRequestGroup->Size = System::Drawing::Size(573, 87);
 			this->DeleteEnrollRequestGroup->TabIndex = 13;
@@ -633,6 +640,7 @@ private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 			this->DeleteEnrollRequestButton->TabIndex = 9;
 			this->DeleteEnrollRequestButton->Text = L"Удалить заявку";
 			this->DeleteEnrollRequestButton->UseVisualStyleBackColor = true;
+			this->DeleteEnrollRequestButton->Click += gcnew System::EventHandler(this, &App::DeleteEnrollRequestButton_Click);
 			// 
 			// DeleteEnrollRequestTextbox
 			// 
@@ -723,11 +731,69 @@ private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 			// TitleLabel
 			// 
 			this->TitleLabel->AutoSize = true;
-			this->TitleLabel->Location = System::Drawing::Point(30, 56);
+			this->TitleLabel->Font = (gcnew System::Drawing::Font(L"JetBrains Mono ExtraBold", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->TitleLabel->Location = System::Drawing::Point(28, 38);
 			this->TitleLabel->Name = L"TitleLabel";
-			this->TitleLabel->Size = System::Drawing::Size(159, 13);
+			this->TitleLabel->Size = System::Drawing::Size(431, 36);
 			this->TitleLabel->TabIndex = 15;
 			this->TitleLabel->Text = L"Система управления курсами";
+			// 
+			// AddEnrollRequestFirstNameErrorProvider
+			// 
+			this->AddEnrollRequestFirstNameErrorProvider->ContainerControl = this;
+			// 
+			// AddEnrollRequestLastNameErrorProvider
+			// 
+			this->AddEnrollRequestLastNameErrorProvider->ContainerControl = this;
+			// 
+			// AddEnrollRequestCourseIDErrorProvider
+			// 
+			this->AddEnrollRequestCourseIDErrorProvider->ContainerControl = this;
+			// 
+			// AddEnrollRequestTypeErrorProvider
+			// 
+			this->AddEnrollRequestTypeErrorProvider->ContainerControl = this;
+			// 
+			// DeleteEnrollRequestErrorProvider
+			// 
+			this->DeleteEnrollRequestErrorProvider->ContainerControl = this;
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this->dataGridViewTextBoxColumn1->FillWeight = 50;
+			this->dataGridViewTextBoxColumn1->HeaderText = L"ID";
+			this->dataGridViewTextBoxColumn1->Name = L"dataGridViewTextBoxColumn1";
+			this->dataGridViewTextBoxColumn1->ReadOnly = true;
+			this->dataGridViewTextBoxColumn1->Width = 50;
+			// 
+			// LastName
+			// 
+			this->LastName->HeaderText = L"Фамилия";
+			this->LastName->Name = L"LastName";
+			this->LastName->ReadOnly = true;
+			this->LastName->Width = 150;
+			// 
+			// FirstName
+			// 
+			this->FirstName->HeaderText = L"Имя";
+			this->FirstName->Name = L"FirstName";
+			this->FirstName->ReadOnly = true;
+			this->FirstName->Width = 150;
+			// 
+			// CourseID
+			// 
+			this->CourseID->HeaderText = L"ID курса";
+			this->CourseID->Name = L"CourseID";
+			this->CourseID->ReadOnly = true;
+			this->CourseID->Width = 120;
+			// 
+			// Type
+			// 
+			this->Type->HeaderText = L"Тип";
+			this->Type->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Индивидуальное", L"Групповое" });
+			this->Type->Name = L"Type";
+			this->Type->ReadOnly = true;
 			// 
 			// App
 			// 
@@ -758,6 +824,11 @@ private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 			this->AppTabWrapper->ResumeLayout(false);
 			this->CoursesTab->ResumeLayout(false);
 			this->EnrollRequestsTab->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AddEnrollRequestFirstNameErrorProvider))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AddEnrollRequestLastNameErrorProvider))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AddEnrollRequestCourseIDErrorProvider))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AddEnrollRequestTypeErrorProvider))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DeleteEnrollRequestErrorProvider))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -796,12 +867,29 @@ private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 			for (int i = items->Count - 1; i >= 0; i--) {
 				if (items[i]->ID == id) {
 					items->RemoveAt(i);
-					MessageBox::Show("Курс с ID " + idToDelete + " удален");
+					MessageBox::Show("Элемент с ID " + idToDelete + " удален");
 					return;
 				}
 			}
 
-			MessageBox::Show("Курс с ID " + idToDelete + " не найден");
+			MessageBox::Show("Элемент с ID " + idToDelete + " не найден");
+		}
+
+	private:
+		template <typename T>
+		bool CheckForID(List<T>^ items, String^ idToCheck) {
+			int id;
+			if (!Int32::TryParse(idToCheck, id)) {
+				return false;
+			}
+
+			for (int i = items->Count - 1; i >= 0; i--) {
+				if (items[i]->ID == id) {
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 	// Global
@@ -811,11 +899,14 @@ private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 		this->WeekTextbox->Text = Convert::ToString(Int32::Parse(this->WeekTextbox->Text) + 2);
 	}
 
-	// Courses Table
+	// Courses Tab
 	private: System::Void UpdateCourseTable() {
 		this->CoursesTable->Rows->Clear();
 		for each (Course^ course in courses) {
-			CoursesTable->Rows->Add(course->ID, course->Language, course->Level, course->Intensity);
+			CoursesTable->Rows->Add(course->ID,
+									course->Language,
+									course->Level,
+									course->Intensity);
 		}
 	}
 
@@ -877,7 +968,10 @@ private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 			return;
 		}
 			
-		Course^ newCourse = gcnew Course(GetNextID(this->courses), this->AddCourseLanguageTextbox->Text, this->AddCourseLevelCombobox->Text, this->AddCourseIntensityCombobox->Text);
+		Course^ newCourse = gcnew Course(GetNextID(this->courses),
+										 this->AddCourseLanguageTextbox->Text,
+									 	 this->AddCourseLevelCombobox->Text,
+									 	 this->AddCourseIntensityCombobox->Text);
 		this->courses->Add(newCourse);
 		UpdateCourseTable();
 
@@ -897,6 +991,109 @@ private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 
 		DeleteByID(this->courses, Convert::ToString(id));
 		UpdateCourseTable();
+	}
+
+	// EnrollRequests Tab
+	private: System::Void UpdateEnrollRequestsTable() {
+		this->EnrollRequestsTable->Rows->Clear();
+		for each (EnrollRequest ^ enrollRequest in enrollRequests) {
+			EnrollRequestsTable->Rows->Add(enrollRequest->ID,
+											enrollRequest->FirstName,
+											enrollRequest->LastName,
+											enrollRequest->CourseID,
+											enrollRequest->Type);
+		}
+	}
+
+	private: bool ValidateEnrollRequestForm() {
+		this->AddEnrollRequestFirstNameErrorProvider->Clear();
+		this->AddEnrollRequestLastNameErrorProvider->Clear();
+		this->AddEnrollRequestCourseIDErrorProvider->Clear();
+		this->AddEnrollRequestTypeErrorProvider->Clear();
+
+		bool result = true;
+
+		System::String^ firstName = this->AddEnrollRequestFirstNameTextbox->Text;
+		System::String^ lastName = this->AddEnrollRequestLastNameTextbox->Text;
+		System::String^ courseIDRaw = this->AddEnrollRequestCourseIDTextbox->Text;
+		System::String^ type = this->AddEnrollRequestTypeCombobox->Text;
+
+		if (firstName == "") {
+			this->AddEnrollRequestFirstNameErrorProvider->SetError(this->AddEnrollRequestFirstNameTextbox, "Пустое имя");
+			result = false;
+		}
+
+		if (lastName == "") {
+			this->AddEnrollRequestLastNameErrorProvider->SetError(this->AddEnrollRequestLastNameTextbox, "Пустая фамилия");
+			result = false;
+		}
+
+		int courseID;
+		if (!Int32::TryParse(courseIDRaw, courseID)) {
+			this->AddEnrollRequestLastNameErrorProvider->SetError(this->AddEnrollRequestCourseIDTextbox, "Некорректный ID курса");
+			result = false;
+		}
+
+		bool isValidCourseID = CheckForID(courses, courseIDRaw);
+		if (!isValidCourseID) {
+			this->AddEnrollRequestCourseIDErrorProvider->SetError(this->AddEnrollRequestCourseIDTextbox, "Курс не найден");
+			result = false;
+		}
+
+		array<String^>^ validTypes = gcnew array<String^> { L"Индивидуальное", L"Групповое" };
+		bool isValidType = false;
+		for each (String^ validType in validTypes) {
+			if (type->Equals(validType)) {
+				isValidType = true;
+				break;
+			}
+		}
+
+		if (!isValidType) {
+			this->AddEnrollRequestTypeErrorProvider->SetError(this->AddEnrollRequestTypeCombobox, "Недопустимый тип занятий");
+			result = false;
+		}
+
+		return result;
+	}
+
+	private: System::Void AddEnrollRequestAddButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (!ValidateEnrollRequestForm()) {
+			return;
+		}
+
+		EnrollRequest^ newEnrollRequest = gcnew EnrollRequest(GetNextID(this->enrollRequests),
+															  this->AddEnrollRequestFirstNameTextbox->Text,
+												   			  this->AddEnrollRequestLastNameTextbox->Text,
+															  Int32::Parse(this->AddEnrollRequestCourseIDTextbox->Text),
+															  this->AddEnrollRequestTypeCombobox->Text);
+		this->enrollRequests->Add(newEnrollRequest);
+		UpdateEnrollRequestsTable();
+
+		this->AddEnrollRequestFirstNameTextbox->Text = "";
+		this->AddEnrollRequestLastNameTextbox->Text = "";
+		this->AddEnrollRequestCourseIDTextbox->Text = "";
+		this->AddEnrollRequestTypeCombobox->Text = "";
+	}
+
+	private: System::Void AddEnrollRequestResetButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->AddEnrollRequestFirstNameTextbox->Text = "";
+		this->AddEnrollRequestLastNameTextbox->Text = "";
+		this->AddEnrollRequestCourseIDTextbox->Text = "";
+		this->AddEnrollRequestTypeCombobox->Text = "";
+	}
+
+	private: System::Void DeleteEnrollRequestButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->DeleteEnrollRequestErrorProvider->Clear();
+
+		int id;
+		if (!Int32::TryParse(this->DeleteEnrollRequestTextbox->Text, id)) {
+			this->DeleteCourseErrorProvider->SetError(this->DeleteCourseTextbox, "Некорректный ID курса");
+			return;
+		}
+
+		DeleteByID(this->enrollRequests, Convert::ToString(id));
+		UpdateEnrollRequestsTable();
 	}
 };
 }

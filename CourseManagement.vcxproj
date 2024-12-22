@@ -127,6 +127,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Course.h" />
+    <ClInclude Include="EnrollRequest.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.resx">

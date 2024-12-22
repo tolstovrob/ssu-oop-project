@@ -29,5 +29,8 @@
     <ClInclude Include="Course.h">
       <Filter>Файлы заголовков\entity</Filter>
     </ClInclude>
+    <ClInclude Include="EnrollRequest.h">
+      <Filter>Файлы заголовков\entity</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
