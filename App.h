@@ -112,6 +112,7 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ ID;
 private: System::Windows::Forms::DataGridViewTextBoxColumn^ Language;
 private: System::Windows::Forms::DataGridViewComboBoxColumn^ Level;
 private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
+	private: System::Windows::Forms::Label^ TitleLabel;
 
 
 	private: System::ComponentModel::IContainer^ components;
@@ -180,6 +181,7 @@ private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 			this->StudentsTab = (gcnew System::Windows::Forms::TabPage());
 			this->IndividualTab = (gcnew System::Windows::Forms::TabPage());
 			this->GroupTabs = (gcnew System::Windows::Forms::TabPage());
+			this->TitleLabel = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->CoursesTable))->BeginInit();
 			this->AddCourseForm->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AddCourseLanguageErrorProvider))->BeginInit();
@@ -200,7 +202,7 @@ private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 			this->WeekLabel->AutoSize = true;
 			this->WeekLabel->Font = (gcnew System::Drawing::Font(L"JetBrains Mono", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->WeekLabel->Location = System::Drawing::Point(30, 39);
+			this->WeekLabel->Location = System::Drawing::Point(822, 47);
 			this->WeekLabel->Name = L"WeekLabel";
 			this->WeekLabel->Size = System::Drawing::Size(103, 27);
 			this->WeekLabel->TabIndex = 0;
@@ -212,7 +214,7 @@ private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 			this->WeekTextbox->Enabled = false;
 			this->WeekTextbox->Font = (gcnew System::Drawing::Font(L"JetBrains Mono", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->WeekTextbox->Location = System::Drawing::Point(136, 36);
+			this->WeekTextbox->Location = System::Drawing::Point(928, 44);
 			this->WeekTextbox->Name = L"WeekTextbox";
 			this->WeekTextbox->ReadOnly = true;
 			this->WeekTextbox->Size = System::Drawing::Size(206, 35);
@@ -391,7 +393,7 @@ private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 			// 
 			this->IncrementLoopButton->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->IncrementLoopButton->Location = System::Drawing::Point(350, 32);
+			this->IncrementLoopButton->Location = System::Drawing::Point(1142, 40);
 			this->IncrementLoopButton->Name = L"IncrementLoopButton";
 			this->IncrementLoopButton->Size = System::Drawing::Size(129, 45);
 			this->IncrementLoopButton->TabIndex = 11;
@@ -718,11 +720,21 @@ private: System::Windows::Forms::DataGridViewComboBoxColumn^ Intensity;
 			this->GroupTabs->Text = L"Групповые занятия";
 			this->GroupTabs->UseVisualStyleBackColor = true;
 			// 
+			// TitleLabel
+			// 
+			this->TitleLabel->AutoSize = true;
+			this->TitleLabel->Location = System::Drawing::Point(30, 56);
+			this->TitleLabel->Name = L"TitleLabel";
+			this->TitleLabel->Size = System::Drawing::Size(159, 13);
+			this->TitleLabel->TabIndex = 15;
+			this->TitleLabel->Text = L"Система управления курсами";
+			// 
 			// App
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1302, 728);
+			this->Controls->Add(this->TitleLabel);
 			this->Controls->Add(this->AppTabWrapper);
 			this->Controls->Add(this->IncrementLoopButton);
 			this->Controls->Add(this->WeekTextbox);
