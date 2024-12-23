@@ -4,8 +4,8 @@ public ref class StudentInfo {
 	public:
 		int ID, PaidWeeksLeft, AttendancePercentage;
 		
-		StudentInfo(int ID, int paidWeeksLeft, int attendancePercentage) {
-			ID = ID;
+		StudentInfo(int id, int paidWeeksLeft, int attendancePercentage) {
+			ID = id;
 			PaidWeeksLeft = paidWeeksLeft;
 			AttendancePercentage = attendancePercentage;
 		}

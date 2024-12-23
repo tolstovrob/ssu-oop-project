@@ -38,11 +38,11 @@ namespace CourseManagement {
 	private: System::Windows::Forms::ErrorProvider^ AddEnrollRequestCourseIDErrorProvider;
 	private: System::Windows::Forms::ErrorProvider^ AddEnrollRequestTypeErrorProvider;
 	private: System::Windows::Forms::ErrorProvider^ DeleteEnrollRequestErrorProvider;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ LastName;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ FirstName;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ CourseID;
-	private: System::Windows::Forms::DataGridViewComboBoxColumn^ Type;
+
+
+
+
+
 	private: System::Windows::Forms::DataGridView^ StudentsTable;
 
 	private: System::Windows::Forms::Panel^ PanelStudentNotSelected;
@@ -68,16 +68,37 @@ namespace CourseManagement {
 
 
 
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ClassID;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ PaidWeeks;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ AttendedPercentage;
-	private: System::Windows::Forms::DataGridViewButtonColumn^ DropStudentButton;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn2;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn3;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn4;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ IsOwed;
-	private: System::Windows::Forms::DataGridViewButtonColumn^ FetchButton;
+
+
+
+
+
+
+
+
+
 	private: System::Windows::Forms::Button^ UpdateEnrollsButton;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ EnrollRequestID;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ EnrollRequestLastName;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ EnrollRequestFirstName;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ EnrollRequestCourseID;
+	private: System::Windows::Forms::DataGridViewComboBoxColumn^ EnrollRequestType;
+	private: System::Windows::Forms::DataGridView^ IndividualClassesTable;
+
+
+
+
+
+
+
+
+
+
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ StudentClassID;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ StudentPaidWeeks;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ StudentAttendedPercentage;
+	private: System::Windows::Forms::DataGridViewButtonColumn^ StudentDropStudentButton;
+	private: System::Windows::Forms::DataGridViewButtonColumn^ StudentPayStudentButton;
 
 
 
@@ -93,7 +114,105 @@ namespace CourseManagement {
 
 
 
-	private: System::Windows::Forms::DataGridViewButtonColumn^ PayStudentButton;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+private: System::Windows::Forms::GroupBox^ UpdateEnrollRequestGroup;
+private: System::Windows::Forms::ComboBox^ UpdateEnrollRequestType;
+
+
+private: System::Windows::Forms::TextBox^ UpdateEnrollRequestCourseIDTextbox;
+private: System::Windows::Forms::Label^ UpdateEnrollRequestCourseIDLabel;
+
+
+
+private: System::Windows::Forms::TextBox^ UpdateEnrollRequestIDTextbox;
+private: System::Windows::Forms::Button^ UpdateEnrollRequestResetButon;
+private: System::Windows::Forms::Button^ UpdateEnrolRequestAddButton;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ StudentsID;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ StudentsLastName;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ StudentsFirstName;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ StudentsIsOwed;
+private: System::Windows::Forms::DataGridViewButtonColumn^ StudentsFetchButton;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesID;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesIsCourseID;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesIsStudentID;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesLastName;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesFirstName;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesIsOwed;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesAttendancePercentage;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesIsDropButton;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesIsPayButton;
+private: System::Windows::Forms::DataGridView^ dataGridView2;
+
+
+
+
+
+private: System::Windows::Forms::Panel^ PanelGroupClassSelected;
+private: System::Windows::Forms::DataGridView^ GroupClassTable;
+
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn1;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn2;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn3;
+private: System::Windows::Forms::DataGridViewButtonColumn^ dataGridViewButtonColumn1;
+private: System::Windows::Forms::DataGridViewButtonColumn^ dataGridViewButtonColumn2;
+private: System::Windows::Forms::TextBox^ GroupIDTextbox;
+
+private: System::Windows::Forms::Label^ GroupIDLabel;
+
+private: System::Windows::Forms::Panel^ PanelGroupClassNotSelected;
+private: System::Windows::Forms::Label^ GroupClassNotSelectedLabel;
+
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn4;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ GroupClassesCourseID;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ GroupClassesStudentID;
+private: System::Windows::Forms::DataGridViewButtonColumn^ dataGridViewButtonColumn3;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ GroupClassesDropGroup;
+
+
+
+private: System::Windows::Forms::Label^ UpdateEnrollRequestIDLabel;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	public:
 		App(void)
@@ -252,11 +371,11 @@ namespace CourseManagement {
 			this->AddCourseIntensityErrorProvider = (gcnew System::Windows::Forms::ErrorProvider(this->components));
 			this->DeleteCourseErrorProvider = (gcnew System::Windows::Forms::ErrorProvider(this->components));
 			this->EnrollRequestsTable = (gcnew System::Windows::Forms::DataGridView());
-			this->dataGridViewTextBoxColumn1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->LastName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->FirstName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->CourseID = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Type = (gcnew System::Windows::Forms::DataGridViewComboBoxColumn());
+			this->EnrollRequestID = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->EnrollRequestLastName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->EnrollRequestFirstName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->EnrollRequestCourseID = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->EnrollRequestType = (gcnew System::Windows::Forms::DataGridViewComboBoxColumn());
 			this->AddEnrollRequestGroup = (gcnew System::Windows::Forms::GroupBox());
 			this->AddEnrollRequestTypeCombobox = (gcnew System::Windows::Forms::ComboBox());
 			this->AddEnrollRequestCourseIDTextbox = (gcnew System::Windows::Forms::TextBox());
@@ -273,25 +392,29 @@ namespace CourseManagement {
 			this->AppTabWrapper = (gcnew System::Windows::Forms::TabControl());
 			this->CoursesTab = (gcnew System::Windows::Forms::TabPage());
 			this->EnrollRequestsTab = (gcnew System::Windows::Forms::TabPage());
+			this->UpdateEnrollRequestGroup = (gcnew System::Windows::Forms::GroupBox());
+			this->UpdateEnrollRequestType = (gcnew System::Windows::Forms::ComboBox());
+			this->UpdateEnrollRequestCourseIDTextbox = (gcnew System::Windows::Forms::TextBox());
+			this->UpdateEnrollRequestCourseIDLabel = (gcnew System::Windows::Forms::Label());
+			this->UpdateEnrollRequestIDTextbox = (gcnew System::Windows::Forms::TextBox());
+			this->UpdateEnrollRequestResetButon = (gcnew System::Windows::Forms::Button());
+			this->UpdateEnrolRequestAddButton = (gcnew System::Windows::Forms::Button());
+			this->UpdateEnrollRequestIDLabel = (gcnew System::Windows::Forms::Label());
 			this->StudentsTab = (gcnew System::Windows::Forms::TabPage());
 			this->PanelStudentSelected = (gcnew System::Windows::Forms::Panel());
 			this->StudentInfoTable = (gcnew System::Windows::Forms::DataGridView());
-			this->ClassID = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->PaidWeeks = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->AttendedPercentage = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->DropStudentButton = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
-			this->PayStudentButton = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
+			this->StudentClassID = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->StudentPaidWeeks = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->StudentAttendedPercentage = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->StudentDropStudentButton = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
+			this->StudentPayStudentButton = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
 			this->StudentIDTextbox = (gcnew System::Windows::Forms::TextBox());
 			this->StudentIDLabel = (gcnew System::Windows::Forms::Label());
 			this->PanelStudentNotSelected = (gcnew System::Windows::Forms::Panel());
 			this->StudentNotSelectedLabel = (gcnew System::Windows::Forms::Label());
 			this->StudentsTable = (gcnew System::Windows::Forms::DataGridView());
-			this->dataGridViewTextBoxColumn2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->dataGridViewTextBoxColumn3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->dataGridViewTextBoxColumn4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->IsOwed = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->FetchButton = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
 			this->IndividualTab = (gcnew System::Windows::Forms::TabPage());
+			this->IndividualClassesTable = (gcnew System::Windows::Forms::DataGridView());
 			this->GroupTabs = (gcnew System::Windows::Forms::TabPage());
 			this->TitleLabel = (gcnew System::Windows::Forms::Label());
 			this->AddEnrollRequestFirstNameErrorProvider = (gcnew System::Windows::Forms::ErrorProvider(this->components));
@@ -300,6 +423,37 @@ namespace CourseManagement {
 			this->AddEnrollRequestTypeErrorProvider = (gcnew System::Windows::Forms::ErrorProvider(this->components));
 			this->DeleteEnrollRequestErrorProvider = (gcnew System::Windows::Forms::ErrorProvider(this->components));
 			this->UpdateEnrollsButton = (gcnew System::Windows::Forms::Button());
+			this->StudentsID = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->StudentsLastName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->StudentsFirstName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->StudentsIsOwed = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->StudentsFetchButton = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
+			this->PanelGroupClassSelected = (gcnew System::Windows::Forms::Panel());
+			this->GroupClassTable = (gcnew System::Windows::Forms::DataGridView());
+			this->dataGridViewTextBoxColumn1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->dataGridViewTextBoxColumn2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->dataGridViewTextBoxColumn3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->dataGridViewButtonColumn1 = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
+			this->dataGridViewButtonColumn2 = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
+			this->GroupIDTextbox = (gcnew System::Windows::Forms::TextBox());
+			this->GroupIDLabel = (gcnew System::Windows::Forms::Label());
+			this->PanelGroupClassNotSelected = (gcnew System::Windows::Forms::Panel());
+			this->GroupClassNotSelectedLabel = (gcnew System::Windows::Forms::Label());
+			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
+			this->IndividualClassesID = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->IndividualClassesIsCourseID = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->IndividualClassesIsStudentID = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->IndividualClassesLastName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->IndividualClassesFirstName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->IndividualClassesIsOwed = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->IndividualClassesAttendancePercentage = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->IndividualClassesIsDropButton = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->IndividualClassesIsPayButton = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->dataGridViewTextBoxColumn4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->GroupClassesCourseID = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->GroupClassesStudentID = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->dataGridViewButtonColumn3 = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
+			this->GroupClassesDropGroup = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->CoursesTable))->BeginInit();
 			this->AddCourseForm->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AddCourseLanguageErrorProvider))->BeginInit();
@@ -313,16 +467,24 @@ namespace CourseManagement {
 			this->AppTabWrapper->SuspendLayout();
 			this->CoursesTab->SuspendLayout();
 			this->EnrollRequestsTab->SuspendLayout();
+			this->UpdateEnrollRequestGroup->SuspendLayout();
 			this->StudentsTab->SuspendLayout();
 			this->PanelStudentSelected->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->StudentInfoTable))->BeginInit();
 			this->PanelStudentNotSelected->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->StudentsTable))->BeginInit();
+			this->IndividualTab->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->IndividualClassesTable))->BeginInit();
+			this->GroupTabs->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AddEnrollRequestFirstNameErrorProvider))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AddEnrollRequestLastNameErrorProvider))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AddEnrollRequestCourseIDErrorProvider))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AddEnrollRequestTypeErrorProvider))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DeleteEnrollRequestErrorProvider))->BeginInit();
+			this->PanelGroupClassSelected->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->GroupClassTable))->BeginInit();
+			this->PanelGroupClassNotSelected->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// WeekLabel
@@ -590,8 +752,8 @@ namespace CourseManagement {
 			this->EnrollRequestsTable->AllowUserToResizeRows = false;
 			this->EnrollRequestsTable->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->EnrollRequestsTable->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {
-				this->dataGridViewTextBoxColumn1,
-					this->LastName, this->FirstName, this->CourseID, this->Type
+				this->EnrollRequestID,
+					this->EnrollRequestLastName, this->EnrollRequestFirstName, this->EnrollRequestCourseID, this->EnrollRequestType
 			});
 			this->EnrollRequestsTable->EnableHeadersVisualStyles = false;
 			this->EnrollRequestsTable->Location = System::Drawing::Point(50, 50);
@@ -601,41 +763,41 @@ namespace CourseManagement {
 			this->EnrollRequestsTable->Size = System::Drawing::Size(573, 495);
 			this->EnrollRequestsTable->TabIndex = 13;
 			// 
-			// dataGridViewTextBoxColumn1
+			// EnrollRequestID
 			// 
-			this->dataGridViewTextBoxColumn1->FillWeight = 50;
-			this->dataGridViewTextBoxColumn1->HeaderText = L"ID";
-			this->dataGridViewTextBoxColumn1->Name = L"dataGridViewTextBoxColumn1";
-			this->dataGridViewTextBoxColumn1->ReadOnly = true;
-			this->dataGridViewTextBoxColumn1->Width = 50;
+			this->EnrollRequestID->FillWeight = 50;
+			this->EnrollRequestID->HeaderText = L"ID";
+			this->EnrollRequestID->Name = L"EnrollRequestID";
+			this->EnrollRequestID->ReadOnly = true;
+			this->EnrollRequestID->Width = 50;
 			// 
-			// LastName
+			// EnrollRequestLastName
 			// 
-			this->LastName->HeaderText = L"Фамилия";
-			this->LastName->Name = L"LastName";
-			this->LastName->ReadOnly = true;
-			this->LastName->Width = 150;
+			this->EnrollRequestLastName->HeaderText = L"Фамилия";
+			this->EnrollRequestLastName->Name = L"EnrollRequestLastName";
+			this->EnrollRequestLastName->ReadOnly = true;
+			this->EnrollRequestLastName->Width = 150;
 			// 
-			// FirstName
+			// EnrollRequestFirstName
 			// 
-			this->FirstName->HeaderText = L"Имя";
-			this->FirstName->Name = L"FirstName";
-			this->FirstName->ReadOnly = true;
-			this->FirstName->Width = 150;
+			this->EnrollRequestFirstName->HeaderText = L"Имя";
+			this->EnrollRequestFirstName->Name = L"EnrollRequestFirstName";
+			this->EnrollRequestFirstName->ReadOnly = true;
+			this->EnrollRequestFirstName->Width = 150;
 			// 
-			// CourseID
+			// EnrollRequestCourseID
 			// 
-			this->CourseID->HeaderText = L"ID курса";
-			this->CourseID->Name = L"CourseID";
-			this->CourseID->ReadOnly = true;
-			this->CourseID->Width = 120;
+			this->EnrollRequestCourseID->HeaderText = L"ID курса";
+			this->EnrollRequestCourseID->Name = L"EnrollRequestCourseID";
+			this->EnrollRequestCourseID->ReadOnly = true;
+			this->EnrollRequestCourseID->Width = 120;
 			// 
-			// Type
+			// EnrollRequestType
 			// 
-			this->Type->HeaderText = L"Тип";
-			this->Type->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Индивидуальное", L"Групповое" });
-			this->Type->Name = L"Type";
-			this->Type->ReadOnly = true;
+			this->EnrollRequestType->HeaderText = L"Тип";
+			this->EnrollRequestType->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Индивидуальное", L"Групповое" });
+			this->EnrollRequestType->Name = L"EnrollRequestType";
+			this->EnrollRequestType->ReadOnly = true;
 			// 
 			// AddEnrollRequestGroup
 			// 
@@ -654,7 +816,7 @@ namespace CourseManagement {
 			this->AddEnrollRequestGroup->Size = System::Drawing::Size(573, 169);
 			this->AddEnrollRequestGroup->TabIndex = 11;
 			this->AddEnrollRequestGroup->TabStop = false;
-			this->AddEnrollRequestGroup->Text = L"Добавить заявку на обучение";
+			this->AddEnrollRequestGroup->Text = L"Добавить новую заявку на обучение";
 			// 
 			// AddEnrollRequestTypeCombobox
 			// 
@@ -747,7 +909,7 @@ namespace CourseManagement {
 			this->DeleteEnrollRequestGroup->Controls->Add(this->DeleteEnrollRequestLabel);
 			this->DeleteEnrollRequestGroup->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 8.249999F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->DeleteEnrollRequestGroup->Location = System::Drawing::Point(666, 225);
+			this->DeleteEnrollRequestGroup->Location = System::Drawing::Point(666, 420);
 			this->DeleteEnrollRequestGroup->Name = L"DeleteEnrollRequestGroup";
 			this->DeleteEnrollRequestGroup->Size = System::Drawing::Size(573, 87);
 			this->DeleteEnrollRequestGroup->TabIndex = 13;
@@ -815,6 +977,7 @@ namespace CourseManagement {
 			// 
 			// EnrollRequestsTab
 			// 
+			this->EnrollRequestsTab->Controls->Add(this->UpdateEnrollRequestGroup);
 			this->EnrollRequestsTab->Controls->Add(this->EnrollRequestsTable);
 			this->EnrollRequestsTab->Controls->Add(this->DeleteEnrollRequestGroup);
 			this->EnrollRequestsTab->Controls->Add(this->AddEnrollRequestGroup);
@@ -824,6 +987,97 @@ namespace CourseManagement {
 			this->EnrollRequestsTab->TabIndex = 1;
 			this->EnrollRequestsTab->Text = L"Заявки на обучение";
 			this->EnrollRequestsTab->UseVisualStyleBackColor = true;
+			// 
+			// UpdateEnrollRequestGroup
+			// 
+			this->UpdateEnrollRequestGroup->Controls->Add(this->UpdateEnrollRequestType);
+			this->UpdateEnrollRequestGroup->Controls->Add(this->UpdateEnrollRequestCourseIDTextbox);
+			this->UpdateEnrollRequestGroup->Controls->Add(this->UpdateEnrollRequestCourseIDLabel);
+			this->UpdateEnrollRequestGroup->Controls->Add(this->UpdateEnrollRequestIDTextbox);
+			this->UpdateEnrollRequestGroup->Controls->Add(this->UpdateEnrollRequestResetButon);
+			this->UpdateEnrollRequestGroup->Controls->Add(this->UpdateEnrolRequestAddButton);
+			this->UpdateEnrollRequestGroup->Controls->Add(this->UpdateEnrollRequestIDLabel);
+			this->UpdateEnrollRequestGroup->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 8.249999F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->UpdateEnrollRequestGroup->Location = System::Drawing::Point(666, 237);
+			this->UpdateEnrollRequestGroup->Name = L"UpdateEnrollRequestGroup";
+			this->UpdateEnrollRequestGroup->Size = System::Drawing::Size(573, 169);
+			this->UpdateEnrollRequestGroup->TabIndex = 14;
+			this->UpdateEnrollRequestGroup->TabStop = false;
+			this->UpdateEnrollRequestGroup->Text = L"Добавить заяку для существующего студента";
+			// 
+			// UpdateEnrollRequestType
+			// 
+			this->UpdateEnrollRequestType->Font = (gcnew System::Drawing::Font(L"JetBrains Mono", 14.25F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->UpdateEnrollRequestType->FormattingEnabled = true;
+			this->UpdateEnrollRequestType->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Индивидуальное", L"Групповое" });
+			this->UpdateEnrollRequestType->Location = System::Drawing::Point(329, 60);
+			this->UpdateEnrollRequestType->Name = L"UpdateEnrollRequestType";
+			this->UpdateEnrollRequestType->Size = System::Drawing::Size(220, 33);
+			this->UpdateEnrollRequestType->TabIndex = 13;
+			// 
+			// UpdateEnrollRequestCourseIDTextbox
+			// 
+			this->UpdateEnrollRequestCourseIDTextbox->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 14.25F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->UpdateEnrollRequestCourseIDTextbox->Location = System::Drawing::Point(104, 60);
+			this->UpdateEnrollRequestCourseIDTextbox->Name = L"UpdateEnrollRequestCourseIDTextbox";
+			this->UpdateEnrollRequestCourseIDTextbox->Size = System::Drawing::Size(219, 33);
+			this->UpdateEnrollRequestCourseIDTextbox->TabIndex = 11;
+			// 
+			// UpdateEnrollRequestCourseIDLabel
+			// 
+			this->UpdateEnrollRequestCourseIDLabel->AutoSize = true;
+			this->UpdateEnrollRequestCourseIDLabel->Font = (gcnew System::Drawing::Font(L"JetBrains Mono", 9.75F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->UpdateEnrollRequestCourseIDLabel->Location = System::Drawing::Point(18, 69);
+			this->UpdateEnrollRequestCourseIDLabel->Name = L"UpdateEnrollRequestCourseIDLabel";
+			this->UpdateEnrollRequestCourseIDLabel->Size = System::Drawing::Size(80, 17);
+			this->UpdateEnrollRequestCourseIDLabel->TabIndex = 10;
+			this->UpdateEnrollRequestCourseIDLabel->Text = L"ID курса:";
+			// 
+			// UpdateEnrollRequestIDTextbox
+			// 
+			this->UpdateEnrollRequestIDTextbox->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 14.25F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->UpdateEnrollRequestIDTextbox->Location = System::Drawing::Point(128, 20);
+			this->UpdateEnrollRequestIDTextbox->Name = L"UpdateEnrollRequestIDTextbox";
+			this->UpdateEnrollRequestIDTextbox->Size = System::Drawing::Size(421, 33);
+			this->UpdateEnrollRequestIDTextbox->TabIndex = 12;
+			// 
+			// UpdateEnrollRequestResetButon
+			// 
+			this->UpdateEnrollRequestResetButon->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 12, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->UpdateEnrollRequestResetButon->Location = System::Drawing::Point(21, 106);
+			this->UpdateEnrollRequestResetButon->Name = L"UpdateEnrollRequestResetButon";
+			this->UpdateEnrollRequestResetButon->Size = System::Drawing::Size(257, 45);
+			this->UpdateEnrollRequestResetButon->TabIndex = 10;
+			this->UpdateEnrollRequestResetButon->Text = L"Очистить форму";
+			this->UpdateEnrollRequestResetButon->UseVisualStyleBackColor = true;
+			// 
+			// UpdateEnrolRequestAddButton
+			// 
+			this->UpdateEnrolRequestAddButton->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 12, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->UpdateEnrolRequestAddButton->Location = System::Drawing::Point(292, 106);
+			this->UpdateEnrolRequestAddButton->Name = L"UpdateEnrolRequestAddButton";
+			this->UpdateEnrolRequestAddButton->Size = System::Drawing::Size(257, 45);
+			this->UpdateEnrolRequestAddButton->TabIndex = 9;
+			this->UpdateEnrolRequestAddButton->Text = L"Добавить заявку";
+			this->UpdateEnrolRequestAddButton->UseVisualStyleBackColor = true;
+			// 
+			// UpdateEnrollRequestIDLabel
+			// 
+			this->UpdateEnrollRequestIDLabel->AutoSize = true;
+			this->UpdateEnrollRequestIDLabel->Font = (gcnew System::Drawing::Font(L"JetBrains Mono", 9.75F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->UpdateEnrollRequestIDLabel->Location = System::Drawing::Point(18, 29);
+			this->UpdateEnrollRequestIDLabel->Name = L"UpdateEnrollRequestIDLabel";
+			this->UpdateEnrollRequestIDLabel->Size = System::Drawing::Size(104, 17);
+			this->UpdateEnrollRequestIDLabel->TabIndex = 3;
+			this->UpdateEnrollRequestIDLabel->Text = L"ID студента:";
 			// 
 			// StudentsTab
 			// 
@@ -855,8 +1109,8 @@ namespace CourseManagement {
 			this->StudentInfoTable->AllowUserToResizeRows = false;
 			this->StudentInfoTable->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->StudentInfoTable->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {
-				this->ClassID,
-					this->PaidWeeks, this->AttendedPercentage, this->DropStudentButton, this->PayStudentButton
+				this->StudentClassID,
+					this->StudentPaidWeeks, this->StudentAttendedPercentage, this->StudentDropStudentButton, this->StudentPayStudentButton
 			});
 			this->StudentInfoTable->EnableHeadersVisualStyles = false;
 			this->StudentInfoTable->Location = System::Drawing::Point(3, 62);
@@ -866,48 +1120,48 @@ namespace CourseManagement {
 			this->StudentInfoTable->Size = System::Drawing::Size(584, 431);
 			this->StudentInfoTable->TabIndex = 16;
 			// 
-			// ClassID
+			// StudentClassID
 			// 
-			this->ClassID->HeaderText = L"ID класса";
-			this->ClassID->Name = L"ClassID";
-			this->ClassID->ReadOnly = true;
-			this->ClassID->Resizable = System::Windows::Forms::DataGridViewTriState::False;
-			this->ClassID->Width = 125;
+			this->StudentClassID->HeaderText = L"ID класса";
+			this->StudentClassID->Name = L"StudentClassID";
+			this->StudentClassID->ReadOnly = true;
+			this->StudentClassID->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			this->StudentClassID->Width = 125;
 			// 
-			// PaidWeeks
+			// StudentPaidWeeks
 			// 
-			this->PaidWeeks->HeaderText = L"Оплачено (нед.)";
-			this->PaidWeeks->Name = L"PaidWeeks";
-			this->PaidWeeks->ReadOnly = true;
-			this->PaidWeeks->Resizable = System::Windows::Forms::DataGridViewTriState::False;
-			this->PaidWeeks->Width = 130;
+			this->StudentPaidWeeks->HeaderText = L"Оплачено (нед.)";
+			this->StudentPaidWeeks->Name = L"StudentPaidWeeks";
+			this->StudentPaidWeeks->ReadOnly = true;
+			this->StudentPaidWeeks->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			this->StudentPaidWeeks->Width = 130;
 			// 
-			// AttendedPercentage
+			// StudentAttendedPercentage
 			// 
-			this->AttendedPercentage->FillWeight = 145;
-			this->AttendedPercentage->HeaderText = L"Посещено (%)";
-			this->AttendedPercentage->Name = L"AttendedPercentage";
-			this->AttendedPercentage->ReadOnly = true;
-			this->AttendedPercentage->Resizable = System::Windows::Forms::DataGridViewTriState::False;
-			this->AttendedPercentage->Width = 145;
+			this->StudentAttendedPercentage->FillWeight = 145;
+			this->StudentAttendedPercentage->HeaderText = L"Посещено (%)";
+			this->StudentAttendedPercentage->Name = L"StudentAttendedPercentage";
+			this->StudentAttendedPercentage->ReadOnly = true;
+			this->StudentAttendedPercentage->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			this->StudentAttendedPercentage->Width = 145;
 			// 
-			// DropStudentButton
+			// StudentDropStudentButton
 			// 
-			this->DropStudentButton->FillWeight = 90;
-			this->DropStudentButton->HeaderText = L"Удалить";
-			this->DropStudentButton->Name = L"DropStudentButton";
-			this->DropStudentButton->ReadOnly = true;
-			this->DropStudentButton->Resizable = System::Windows::Forms::DataGridViewTriState::False;
-			this->DropStudentButton->Width = 90;
+			this->StudentDropStudentButton->FillWeight = 90;
+			this->StudentDropStudentButton->HeaderText = L"Удалить";
+			this->StudentDropStudentButton->Name = L"StudentDropStudentButton";
+			this->StudentDropStudentButton->ReadOnly = true;
+			this->StudentDropStudentButton->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			this->StudentDropStudentButton->Width = 90;
 			// 
-			// PayStudentButton
+			// StudentPayStudentButton
 			// 
-			this->PayStudentButton->FillWeight = 90;
-			this->PayStudentButton->HeaderText = L"Продлить";
-			this->PayStudentButton->Name = L"PayStudentButton";
-			this->PayStudentButton->ReadOnly = true;
-			this->PayStudentButton->Resizable = System::Windows::Forms::DataGridViewTriState::False;
-			this->PayStudentButton->Width = 90;
+			this->StudentPayStudentButton->FillWeight = 90;
+			this->StudentPayStudentButton->HeaderText = L"Продлить";
+			this->StudentPayStudentButton->Name = L"StudentPayStudentButton";
+			this->StudentPayStudentButton->ReadOnly = true;
+			this->StudentPayStudentButton->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			this->StudentPayStudentButton->Width = 90;
 			// 
 			// StudentIDTextbox
 			// 
@@ -954,8 +1208,8 @@ namespace CourseManagement {
 			this->StudentsTable->AllowUserToResizeRows = false;
 			this->StudentsTable->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->StudentsTable->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {
-				this->dataGridViewTextBoxColumn2,
-					this->dataGridViewTextBoxColumn3, this->dataGridViewTextBoxColumn4, this->IsOwed, this->FetchButton
+				this->StudentsID,
+					this->StudentsLastName, this->StudentsFirstName, this->StudentsIsOwed, this->StudentsFetchButton
 			});
 			this->StudentsTable->EnableHeadersVisualStyles = false;
 			this->StudentsTable->Location = System::Drawing::Point(50, 50);
@@ -966,47 +1220,9 @@ namespace CourseManagement {
 			this->StudentsTable->TabIndex = 14;
 			this->StudentsTable->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &App::StudentsTable_CellContentClick);
 			// 
-			// dataGridViewTextBoxColumn2
-			// 
-			this->dataGridViewTextBoxColumn2->FillWeight = 50;
-			this->dataGridViewTextBoxColumn2->HeaderText = L"ID";
-			this->dataGridViewTextBoxColumn2->Name = L"dataGridViewTextBoxColumn2";
-			this->dataGridViewTextBoxColumn2->ReadOnly = true;
-			this->dataGridViewTextBoxColumn2->Width = 50;
-			// 
-			// dataGridViewTextBoxColumn3
-			// 
-			this->dataGridViewTextBoxColumn3->HeaderText = L"Фамилия";
-			this->dataGridViewTextBoxColumn3->Name = L"dataGridViewTextBoxColumn3";
-			this->dataGridViewTextBoxColumn3->ReadOnly = true;
-			this->dataGridViewTextBoxColumn3->Width = 170;
-			// 
-			// dataGridViewTextBoxColumn4
-			// 
-			this->dataGridViewTextBoxColumn4->HeaderText = L"Имя";
-			this->dataGridViewTextBoxColumn4->Name = L"dataGridViewTextBoxColumn4";
-			this->dataGridViewTextBoxColumn4->ReadOnly = true;
-			this->dataGridViewTextBoxColumn4->Width = 170;
-			// 
-			// IsOwed
-			// 
-			this->IsOwed->HeaderText = L"Долг";
-			this->IsOwed->Name = L"IsOwed";
-			this->IsOwed->ReadOnly = true;
-			this->IsOwed->Width = 120;
-			// 
-			// FetchButton
-			// 
-			this->FetchButton->HeaderText = L"Инфо";
-			this->FetchButton->Name = L"FetchButton";
-			this->FetchButton->ReadOnly = true;
-			this->FetchButton->Resizable = System::Windows::Forms::DataGridViewTriState::True;
-			this->FetchButton->SortMode = System::Windows::Forms::DataGridViewColumnSortMode::Automatic;
-			this->FetchButton->Text = L"...";
-			this->FetchButton->Width = 50;
-			// 
 			// IndividualTab
 			// 
+			this->IndividualTab->Controls->Add(this->IndividualClassesTable);
 			this->IndividualTab->Location = System::Drawing::Point(4, 30);
 			this->IndividualTab->Name = L"IndividualTab";
 			this->IndividualTab->Size = System::Drawing::Size(1297, 592);
@@ -1014,8 +1230,30 @@ namespace CourseManagement {
 			this->IndividualTab->Text = L"Индивидуальные занятия";
 			this->IndividualTab->UseVisualStyleBackColor = true;
 			// 
+			// IndividualClassesTable
+			// 
+			this->IndividualClassesTable->AllowUserToAddRows = false;
+			this->IndividualClassesTable->AllowUserToResizeColumns = false;
+			this->IndividualClassesTable->AllowUserToResizeRows = false;
+			this->IndividualClassesTable->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->IndividualClassesTable->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(9) {
+				this->IndividualClassesID,
+					this->IndividualClassesIsCourseID, this->IndividualClassesIsStudentID, this->IndividualClassesLastName, this->IndividualClassesFirstName,
+					this->IndividualClassesIsOwed, this->IndividualClassesAttendancePercentage, this->IndividualClassesIsDropButton, this->IndividualClassesIsPayButton
+			});
+			this->IndividualClassesTable->EnableHeadersVisualStyles = false;
+			this->IndividualClassesTable->Location = System::Drawing::Point(50, 50);
+			this->IndividualClassesTable->Name = L"IndividualClassesTable";
+			this->IndividualClassesTable->ReadOnly = true;
+			this->IndividualClassesTable->RowHeadersVisible = false;
+			this->IndividualClassesTable->Size = System::Drawing::Size(1053, 493);
+			this->IndividualClassesTable->TabIndex = 17;
+			// 
 			// GroupTabs
 			// 
+			this->GroupTabs->Controls->Add(this->dataGridView2);
+			this->GroupTabs->Controls->Add(this->PanelGroupClassNotSelected);
+			this->GroupTabs->Controls->Add(this->PanelGroupClassSelected);
 			this->GroupTabs->Location = System::Drawing::Point(4, 30);
 			this->GroupTabs->Name = L"GroupTabs";
 			this->GroupTabs->Size = System::Drawing::Size(1297, 592);
@@ -1066,6 +1304,272 @@ namespace CourseManagement {
 			this->UpdateEnrollsButton->UseVisualStyleBackColor = true;
 			this->UpdateEnrollsButton->Click += gcnew System::EventHandler(this, &App::UpdateEnrollsButton_Click);
 			// 
+			// StudentsID
+			// 
+			this->StudentsID->FillWeight = 50;
+			this->StudentsID->HeaderText = L"ID";
+			this->StudentsID->Name = L"StudentsID";
+			this->StudentsID->ReadOnly = true;
+			this->StudentsID->Width = 50;
+			// 
+			// StudentsLastName
+			// 
+			this->StudentsLastName->HeaderText = L"Фамилия";
+			this->StudentsLastName->Name = L"StudentsLastName";
+			this->StudentsLastName->ReadOnly = true;
+			this->StudentsLastName->Width = 170;
+			// 
+			// StudentsFirstName
+			// 
+			this->StudentsFirstName->HeaderText = L"Имя";
+			this->StudentsFirstName->Name = L"StudentsFirstName";
+			this->StudentsFirstName->ReadOnly = true;
+			this->StudentsFirstName->Width = 170;
+			// 
+			// StudentsIsOwed
+			// 
+			this->StudentsIsOwed->HeaderText = L"Оплачено\?";
+			this->StudentsIsOwed->Name = L"StudentsIsOwed";
+			this->StudentsIsOwed->ReadOnly = true;
+			this->StudentsIsOwed->Width = 120;
+			// 
+			// StudentsFetchButton
+			// 
+			this->StudentsFetchButton->HeaderText = L"Инфо";
+			this->StudentsFetchButton->Name = L"StudentsFetchButton";
+			this->StudentsFetchButton->ReadOnly = true;
+			this->StudentsFetchButton->Resizable = System::Windows::Forms::DataGridViewTriState::True;
+			this->StudentsFetchButton->SortMode = System::Windows::Forms::DataGridViewColumnSortMode::Automatic;
+			this->StudentsFetchButton->Text = L"...";
+			this->StudentsFetchButton->Width = 50;
+			// 
+			// PanelGroupClassSelected
+			// 
+			this->PanelGroupClassSelected->Controls->Add(this->GroupClassTable);
+			this->PanelGroupClassSelected->Controls->Add(this->GroupIDTextbox);
+			this->PanelGroupClassSelected->Controls->Add(this->GroupIDLabel);
+			this->PanelGroupClassSelected->Location = System::Drawing::Point(652, 48);
+			this->PanelGroupClassSelected->Name = L"PanelGroupClassSelected";
+			this->PanelGroupClassSelected->Size = System::Drawing::Size(587, 496);
+			this->PanelGroupClassSelected->TabIndex = 19;
+			this->PanelGroupClassSelected->Visible = false;
+			// 
+			// GroupClassTable
+			// 
+			this->GroupClassTable->AllowUserToAddRows = false;
+			this->GroupClassTable->AllowUserToResizeColumns = false;
+			this->GroupClassTable->AllowUserToResizeRows = false;
+			this->GroupClassTable->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->GroupClassTable->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {
+				this->dataGridViewTextBoxColumn1,
+					this->dataGridViewTextBoxColumn2, this->dataGridViewTextBoxColumn3, this->dataGridViewButtonColumn1, this->dataGridViewButtonColumn2
+			});
+			this->GroupClassTable->EnableHeadersVisualStyles = false;
+			this->GroupClassTable->Location = System::Drawing::Point(3, 62);
+			this->GroupClassTable->Name = L"GroupClassTable";
+			this->GroupClassTable->ReadOnly = true;
+			this->GroupClassTable->RowHeadersVisible = false;
+			this->GroupClassTable->Size = System::Drawing::Size(584, 431);
+			this->GroupClassTable->TabIndex = 16;
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this->dataGridViewTextBoxColumn1->HeaderText = L"ID класса";
+			this->dataGridViewTextBoxColumn1->Name = L"dataGridViewTextBoxColumn1";
+			this->dataGridViewTextBoxColumn1->ReadOnly = true;
+			this->dataGridViewTextBoxColumn1->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			this->dataGridViewTextBoxColumn1->Width = 125;
+			// 
+			// dataGridViewTextBoxColumn2
+			// 
+			this->dataGridViewTextBoxColumn2->HeaderText = L"Оплачено (нед.)";
+			this->dataGridViewTextBoxColumn2->Name = L"dataGridViewTextBoxColumn2";
+			this->dataGridViewTextBoxColumn2->ReadOnly = true;
+			this->dataGridViewTextBoxColumn2->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			this->dataGridViewTextBoxColumn2->Width = 130;
+			// 
+			// dataGridViewTextBoxColumn3
+			// 
+			this->dataGridViewTextBoxColumn3->FillWeight = 145;
+			this->dataGridViewTextBoxColumn3->HeaderText = L"Посещено (%)";
+			this->dataGridViewTextBoxColumn3->Name = L"dataGridViewTextBoxColumn3";
+			this->dataGridViewTextBoxColumn3->ReadOnly = true;
+			this->dataGridViewTextBoxColumn3->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			this->dataGridViewTextBoxColumn3->Width = 145;
+			// 
+			// dataGridViewButtonColumn1
+			// 
+			this->dataGridViewButtonColumn1->FillWeight = 90;
+			this->dataGridViewButtonColumn1->HeaderText = L"Удалить";
+			this->dataGridViewButtonColumn1->Name = L"dataGridViewButtonColumn1";
+			this->dataGridViewButtonColumn1->ReadOnly = true;
+			this->dataGridViewButtonColumn1->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			this->dataGridViewButtonColumn1->Width = 90;
+			// 
+			// dataGridViewButtonColumn2
+			// 
+			this->dataGridViewButtonColumn2->FillWeight = 90;
+			this->dataGridViewButtonColumn2->HeaderText = L"Продлить";
+			this->dataGridViewButtonColumn2->Name = L"dataGridViewButtonColumn2";
+			this->dataGridViewButtonColumn2->ReadOnly = true;
+			this->dataGridViewButtonColumn2->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			this->dataGridViewButtonColumn2->Width = 90;
+			// 
+			// GroupIDTextbox
+			// 
+			this->GroupIDTextbox->Cursor = System::Windows::Forms::Cursors::Default;
+			this->GroupIDTextbox->Enabled = false;
+			this->GroupIDTextbox->Font = (gcnew System::Drawing::Font(L"JetBrains Mono", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->GroupIDTextbox->Location = System::Drawing::Point(177, 3);
+			this->GroupIDTextbox->Name = L"GroupIDTextbox";
+			this->GroupIDTextbox->ReadOnly = true;
+			this->GroupIDTextbox->Size = System::Drawing::Size(381, 35);
+			this->GroupIDTextbox->TabIndex = 16;
+			// 
+			// GroupIDLabel
+			// 
+			this->GroupIDLabel->AutoSize = true;
+			this->GroupIDLabel->Location = System::Drawing::Point(41, 11);
+			this->GroupIDLabel->Name = L"GroupIDLabel";
+			this->GroupIDLabel->Size = System::Drawing::Size(130, 21);
+			this->GroupIDLabel->TabIndex = 0;
+			this->GroupIDLabel->Text = L"ID студента:";
+			// 
+			// PanelGroupClassNotSelected
+			// 
+			this->PanelGroupClassNotSelected->Controls->Add(this->GroupClassNotSelectedLabel);
+			this->PanelGroupClassNotSelected->Location = System::Drawing::Point(652, 48);
+			this->PanelGroupClassNotSelected->Name = L"PanelGroupClassNotSelected";
+			this->PanelGroupClassNotSelected->Size = System::Drawing::Size(587, 496);
+			this->PanelGroupClassNotSelected->TabIndex = 18;
+			// 
+			// GroupClassNotSelectedLabel
+			// 
+			this->GroupClassNotSelectedLabel->AutoSize = true;
+			this->GroupClassNotSelectedLabel->Location = System::Drawing::Point(53, 38);
+			this->GroupClassNotSelectedLabel->Name = L"GroupClassNotSelectedLabel";
+			this->GroupClassNotSelectedLabel->Size = System::Drawing::Size(480, 21);
+			this->GroupClassNotSelectedLabel->TabIndex = 0;
+			this->GroupClassNotSelectedLabel->Text = L"Здесь появится подробная информация о  студенте";
+			// 
+			// dataGridView2
+			// 
+			this->dataGridView2->AllowUserToAddRows = false;
+			this->dataGridView2->AllowUserToResizeColumns = false;
+			this->dataGridView2->AllowUserToResizeRows = false;
+			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView2->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {
+				this->dataGridViewTextBoxColumn4,
+					this->GroupClassesCourseID, this->GroupClassesStudentID, this->dataGridViewButtonColumn3, this->GroupClassesDropGroup
+			});
+			this->dataGridView2->EnableHeadersVisualStyles = false;
+			this->dataGridView2->Location = System::Drawing::Point(39, 45);
+			this->dataGridView2->Name = L"dataGridView2";
+			this->dataGridView2->ReadOnly = true;
+			this->dataGridView2->RowHeadersVisible = false;
+			this->dataGridView2->Size = System::Drawing::Size(595, 496);
+			this->dataGridView2->TabIndex = 17;
+			// 
+			// IndividualClassesID
+			// 
+			this->IndividualClassesID->FillWeight = 50;
+			this->IndividualClassesID->HeaderText = L"ID";
+			this->IndividualClassesID->Name = L"IndividualClassesID";
+			this->IndividualClassesID->ReadOnly = true;
+			this->IndividualClassesID->Width = 50;
+			// 
+			// IndividualClassesIsCourseID
+			// 
+			this->IndividualClassesIsCourseID->HeaderText = L"ID курса";
+			this->IndividualClassesIsCourseID->Name = L"IndividualClassesIsCourseID";
+			this->IndividualClassesIsCourseID->ReadOnly = true;
+			// 
+			// IndividualClassesIsStudentID
+			// 
+			this->IndividualClassesIsStudentID->HeaderText = L"ID студента";
+			this->IndividualClassesIsStudentID->Name = L"IndividualClassesIsStudentID";
+			this->IndividualClassesIsStudentID->ReadOnly = true;
+			// 
+			// IndividualClassesLastName
+			// 
+			this->IndividualClassesLastName->HeaderText = L"Фамилия";
+			this->IndividualClassesLastName->Name = L"IndividualClassesLastName";
+			this->IndividualClassesLastName->ReadOnly = true;
+			this->IndividualClassesLastName->Width = 150;
+			// 
+			// IndividualClassesFirstName
+			// 
+			this->IndividualClassesFirstName->HeaderText = L"Имя";
+			this->IndividualClassesFirstName->Name = L"IndividualClassesFirstName";
+			this->IndividualClassesFirstName->ReadOnly = true;
+			this->IndividualClassesFirstName->Width = 150;
+			// 
+			// IndividualClassesIsOwed
+			// 
+			this->IndividualClassesIsOwed->HeaderText = L"Оплачено (нед.)";
+			this->IndividualClassesIsOwed->Name = L"IndividualClassesIsOwed";
+			this->IndividualClassesIsOwed->ReadOnly = true;
+			this->IndividualClassesIsOwed->Width = 150;
+			// 
+			// IndividualClassesAttendancePercentage
+			// 
+			this->IndividualClassesAttendancePercentage->HeaderText = L"Посещено (%)";
+			this->IndividualClassesAttendancePercentage->Name = L"IndividualClassesAttendancePercentage";
+			this->IndividualClassesAttendancePercentage->ReadOnly = true;
+			this->IndividualClassesAttendancePercentage->Resizable = System::Windows::Forms::DataGridViewTriState::True;
+			this->IndividualClassesAttendancePercentage->Width = 150;
+			// 
+			// IndividualClassesIsDropButton
+			// 
+			this->IndividualClassesIsDropButton->HeaderText = L"Закрыть класс";
+			this->IndividualClassesIsDropButton->Name = L"IndividualClassesIsDropButton";
+			this->IndividualClassesIsDropButton->ReadOnly = true;
+			// 
+			// IndividualClassesIsPayButton
+			// 
+			this->IndividualClassesIsPayButton->HeaderText = L"Продлить";
+			this->IndividualClassesIsPayButton->Name = L"IndividualClassesIsPayButton";
+			this->IndividualClassesIsPayButton->ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn4
+			// 
+			this->dataGridViewTextBoxColumn4->FillWeight = 50;
+			this->dataGridViewTextBoxColumn4->HeaderText = L"ID";
+			this->dataGridViewTextBoxColumn4->Name = L"dataGridViewTextBoxColumn4";
+			this->dataGridViewTextBoxColumn4->ReadOnly = true;
+			this->dataGridViewTextBoxColumn4->Width = 50;
+			// 
+			// GroupClassesCourseID
+			// 
+			this->GroupClassesCourseID->HeaderText = L"ID курса";
+			this->GroupClassesCourseID->Name = L"GroupClassesCourseID";
+			this->GroupClassesCourseID->ReadOnly = true;
+			this->GroupClassesCourseID->Width = 120;
+			// 
+			// GroupClassesStudentID
+			// 
+			this->GroupClassesStudentID->HeaderText = L"ID студентов";
+			this->GroupClassesStudentID->Name = L"GroupClassesStudentID";
+			this->GroupClassesStudentID->ReadOnly = true;
+			this->GroupClassesStudentID->Width = 200;
+			// 
+			// dataGridViewButtonColumn3
+			// 
+			this->dataGridViewButtonColumn3->HeaderText = L"Инфо";
+			this->dataGridViewButtonColumn3->Name = L"dataGridViewButtonColumn3";
+			this->dataGridViewButtonColumn3->ReadOnly = true;
+			this->dataGridViewButtonColumn3->Resizable = System::Windows::Forms::DataGridViewTriState::True;
+			this->dataGridViewButtonColumn3->SortMode = System::Windows::Forms::DataGridViewColumnSortMode::Automatic;
+			this->dataGridViewButtonColumn3->Text = L"...";
+			// 
+			// GroupClassesDropGroup
+			// 
+			this->GroupClassesDropGroup->HeaderText = L"Распустить";
+			this->GroupClassesDropGroup->Name = L"GroupClassesDropGroup";
+			this->GroupClassesDropGroup->ReadOnly = true;
+			this->GroupClassesDropGroup->Width = 120;
+			// 
 			// App
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1099,6 +1603,8 @@ namespace CourseManagement {
 			this->AppTabWrapper->ResumeLayout(false);
 			this->CoursesTab->ResumeLayout(false);
 			this->EnrollRequestsTab->ResumeLayout(false);
+			this->UpdateEnrollRequestGroup->ResumeLayout(false);
+			this->UpdateEnrollRequestGroup->PerformLayout();
 			this->StudentsTab->ResumeLayout(false);
 			this->PanelStudentSelected->ResumeLayout(false);
 			this->PanelStudentSelected->PerformLayout();
@@ -1106,11 +1612,20 @@ namespace CourseManagement {
 			this->PanelStudentNotSelected->ResumeLayout(false);
 			this->PanelStudentNotSelected->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->StudentsTable))->EndInit();
+			this->IndividualTab->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->IndividualClassesTable))->EndInit();
+			this->GroupTabs->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AddEnrollRequestFirstNameErrorProvider))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AddEnrollRequestLastNameErrorProvider))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AddEnrollRequestCourseIDErrorProvider))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AddEnrollRequestTypeErrorProvider))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DeleteEnrollRequestErrorProvider))->EndInit();
+			this->PanelGroupClassSelected->ResumeLayout(false);
+			this->PanelGroupClassSelected->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->GroupClassTable))->EndInit();
+			this->PanelGroupClassNotSelected->ResumeLayout(false);
+			this->PanelGroupClassNotSelected->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -1513,16 +2028,47 @@ namespace CourseManagement {
 	private: System::Void UpdateStudentsTable() {
 		this->StudentsTable->Rows->Clear();
 
+		cliext::set<int> owed;
+		for each (GroupClass ^ groupClass in groupClasses) {
+			for each (StudentInfo ^ studentInfo in groupClass->Students) {
+				if (studentInfo->PaidWeeksLeft < 0) {
+					owed.insert(studentInfo->ID);
+				}
+			}
+		}
+
+		for each (IndividualClass ^ individualClass in individualClasses) {
+			if (individualClass->Student->PaidWeeksLeft < 0) {
+				owed.insert(individualClass->Student->ID);
+			}
+		}
+
 		for each (Student^ student in students) {
+			String^ isOwedStr = owed.find(student->ID) == owed.end() ? "Нет" : "Есть";
 			this->StudentsTable->Rows->Add(student->ID,
 								 	 student->FirstName,
 									 student->LastName,
-									 "Есть", "...");
+									 isOwedStr, "...");
 		}
 	}
 
 	private: System::Void FetchStudentInfo(int id) {
+		this->StudentInfoTable->Rows->Clear();
 		this->StudentIDTextbox->Text = Convert::ToString(id);
+
+		for each (GroupClass ^ groupClass in groupClasses) {
+			for each (StudentInfo ^ studentInfo in groupClass->Students) {
+				if (studentInfo->ID == id) {
+					this->StudentInfoTable->Rows->Add(groupClass->ID, studentInfo->PaidWeeksLeft, studentInfo->AttendancePercentage, "X", ">");
+				}
+			}
+		}
+
+		for each (IndividualClass ^ individualClass in individualClasses) {
+			if (individualClass->Student->ID == id) {
+				this->StudentInfoTable->Rows->Add(individualClass->ID, individualClass->Student->PaidWeeksLeft, individualClass->Student->AttendancePercentage, "X", ">");
+			}
+		}
 	}
 	
 	private: System::Void StudentsTable_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
