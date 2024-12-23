@@ -12,8 +12,8 @@ namespace CourseManagement {
         int ID, CourseID;
         StudentInfo^ Student;
 
-        IndividualClass(int id, int courseID, StudentInfo student) : BaseClass(id, courseID) {
-            Student = gcnew StudentInfo(student.ID, student.PaidWeeksLeft, student.AttendancePercentage);
+        IndividualClass(int id, int courseID, StudentInfo^ student) : BaseClass(id, courseID) {
+            Student = gcnew StudentInfo(student->ID, student->PaidWeeksLeft, student->AttendancePercentage);
         }
     };
 }

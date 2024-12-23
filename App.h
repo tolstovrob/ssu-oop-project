@@ -3,6 +3,12 @@
 #include "Course.h"
 #include "EnrollRequest.h"
 #include "Student.h"
+#include "StudentInfo.h"
+#include "IndividualClass.h"
+#include "GroupClass.h"
+
+#include <cliext/map>
+#include <cliext/set>
 
 namespace CourseManagement {
 
@@ -23,6 +29,8 @@ namespace CourseManagement {
 		List<Course^>^ courses;
 		List<EnrollRequest^>^ enrollRequests;
 		List<Student^>^ students;
+		List<IndividualClass^>^ individualClasses;
+		List<GroupClass^>^ groupClasses;
 
 	private: 
 	private: System::Windows::Forms::ErrorProvider^ AddEnrollRequestFirstNameErrorProvider;
@@ -95,6 +103,8 @@ namespace CourseManagement {
 			courses = gcnew List<Course^>();
 			enrollRequests = gcnew List<EnrollRequest^>();
 			students = gcnew List<Student^>();
+			individualClasses = gcnew List<IndividualClass^>();
+			groupClasses = gcnew List<GroupClass^>();
 		}
 
 	protected:
@@ -1170,21 +1180,129 @@ namespace CourseManagement {
 	}
 
 	private: System::Void UpdateEnrollsButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		for each(EnrollRequest ^ enrollRequest in enrollRequests) {
-			if (enrollRequest->Type == "Индивидуальное") {
+		cliext::map<int, List<EnrollRequest^>^> bufferGroupEnrollRequests;
+		cliext::map<int, GroupClass^> bufferGroups;
+		cliext::set<int> courseIDs;
 
+		for each (Course ^ course in courses) {
+			courseIDs.insert(course->ID);
+		}
+
+		for each (int courseID in courseIDs) {
+			int bufferID = GetNextID(groupClasses);
+			GroupClass^ bufferGroup = gcnew GroupClass(bufferID, courseID);
+			List<EnrollRequest^>^ bufferGroupEnrollRequest = gcnew List<EnrollRequest^>();
+
+			bufferGroups.insert(cliext::map<int, GroupClass^>::make_value(courseID, bufferGroup));
+			bufferGroupEnrollRequests.insert(cliext::map<int, List<EnrollRequest^>^>::make_value(courseID, bufferGroupEnrollRequest));
+		}
+
+		for (int i = 0; i < enrollRequests->Count; ++i) {
+			EnrollRequest^ enrollRequest = enrollRequests[i];
+
+			int studentID = GetNextID(students);
+			StudentInfo^ curStudentInfo = gcnew StudentInfo(studentID, 2, 0);
+			Student^ curStudent = gcnew Student(studentID, enrollRequest->FirstName, enrollRequest->LastName);
+
+			if (enrollRequest->Type == "Индивидуальное") {
+				IndividualClass^ newClass = gcnew IndividualClass(GetNextID(individualClasses), enrollRequest->CourseID, curStudentInfo);
+				individualClasses->Add(newClass);
+				enrollRequests->RemoveAt(i);
+				--i;
+			}
+			else {
+				bufferGroups[enrollRequest->CourseID]->enrollStudent(studentID);
+				bufferGroupEnrollRequests[enrollRequest->CourseID]->Add(enrollRequest);
+
+				if (bufferGroups[enrollRequest->CourseID]->Students->Count == 7) {
+					groupClasses->Add(bufferGroups[enrollRequest->CourseID]);
+					bufferGroups[enrollRequest->CourseID]->Students->Clear();
+
+					i -= bufferGroupEnrollRequests[enrollRequest->CourseID]->Count;
+
+					for each (EnrollRequest ^ enrollRequest in bufferGroupEnrollRequests[enrollRequest->CourseID]) {
+						enrollRequests->Remove(enrollRequest);
+					}
+
+					bufferGroupEnrollRequests[enrollRequest->CourseID]->Clear();
+
+					bufferGroups[enrollRequest->CourseID]->ID = GetNextID(groupClasses);
+				}
+			}
+
+			students->Add(curStudent);
+		}
+
+		for each (int courseID in courseIDs) {
+			List<EnrollRequest^>^ bufferGroupEnrollRequestsList = bufferGroupEnrollRequests[courseID];
+			
+			if (bufferGroupEnrollRequestsList->Count >= 5) {
+				GroupClass^ newGroup = gcnew GroupClass(GetNextID(groupClasses), courseID);
+
+				for each (EnrollRequest ^ enrollRequest in bufferGroupEnrollRequestsList) {
+					int studentID = GetNextID(students);
+					Student^ curStudent = gcnew Student(studentID, enrollRequest->FirstName, enrollRequest->LastName);
+					
+					if (newGroup->enrollStudent(studentID)) {
+						students->Add(curStudent);
+					};
+				}
+
+				groupClasses->Add(newGroup);
+				bufferGroupEnrollRequestsList->Clear();
+			}
+			else {
+				int groupCount = 0;
+				GroupClass^ firstOccurredGroup;
+				for each (GroupClass ^ groupClass in groupClasses) {
+					if (groupClass->CourseID == courseID) {
+						groupCount++;
+						firstOccurredGroup = groupClass;
+					}
+
+					if (groupCount > 1) {
+						break;
+					}
+				}
+
+				if (groupCount == 0) {
+					break;
+				} else if (groupCount == 1 && bufferGroupEnrollRequestsList->Count == 4) {
+					GroupClass^ newGroup = gcnew GroupClass(GetNextID(groupClasses), courseID);
+
+					for (int i = 0; i < bufferGroupEnrollRequestsList->Count; ++i) {
+						EnrollRequest^ enrollRequest = bufferGroupEnrollRequestsList[i];
+						int studentID = GetNextID(students);
+						Student^ curStudent = gcnew Student(studentID, enrollRequest->FirstName, enrollRequest->LastName);
+
+						if (newGroup->enrollStudent(studentID)) {
+							students->Add(curStudent);
+							bufferGroupEnrollRequestsList->RemoveAt(i);
+							--i;
+						};
+					}
+
+					int moveStudentID = firstOccurredGroup->dropStudent(firstOccurredGroup->Students[0]->ID)->ID;
+					newGroup->enrollStudent(moveStudentID);
+				}
+				else while (bufferGroupEnrollRequestsList->Count > 0) {
+					for each (GroupClass ^ groupClass in groupClasses) {
+						if (groupClass->CourseID == courseID) {
+							int studentID = GetNextID(students);
+							Student^ curStudent = gcnew Student(studentID, bufferGroupEnrollRequestsList[0]->FirstName, bufferGroupEnrollRequestsList[0]->LastName);
+
+							if (groupClass->enrollStudent(curStudent->ID)) {
+								students->Add(curStudent);
+								bufferGroupEnrollRequestsList->RemoveAt(0);
+							}
+						}
+					}
+				}
 			}
 		}
 
-
-		for each(EnrollRequest ^ enrollRequest in enrollRequests) {
-			Student^ newStudent = gcnew Student(GetNextID(students),
-												enrollRequest->FirstName,
-												enrollRequest->LastName);
-			students->Add(newStudent);
-		}
-
 		UpdateStudentsTable();
+		UpdateEnrollRequestsTable();
 	}
 
 	// Courses Tab
