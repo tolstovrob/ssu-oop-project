@@ -2,6 +2,7 @@
 
 #include "Course.h"
 #include "EnrollRequest.h"
+#include "Student.h"
 
 namespace CourseManagement {
 
@@ -18,8 +19,12 @@ namespace CourseManagement {
 	/// </summary>
 	public ref class App : public System::Windows::Forms::Form
 	{
-	private: 
+	private:
 		List<Course^>^ courses;
+		List<EnrollRequest^>^ enrollRequests;
+		List<Student^>^ students;
+
+	private: 
 	private: System::Windows::Forms::ErrorProvider^ AddEnrollRequestFirstNameErrorProvider;
 	private: System::Windows::Forms::ErrorProvider^ AddEnrollRequestLastNameErrorProvider;
 	private: System::Windows::Forms::ErrorProvider^ AddEnrollRequestCourseIDErrorProvider;
@@ -34,11 +39,11 @@ namespace CourseManagement {
 
 	private: System::Windows::Forms::Panel^ PanelStudentNotSelected;
 
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn2;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn3;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn4;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ IsOwed;
-	private: System::Windows::Forms::DataGridViewButtonColumn^ FetchButton;
+
+
+
+
+
 	private: System::Windows::Forms::Label^ StudentNotSelectedLabel;
 
 	private: System::Windows::Forms::Panel^ PanelStudentSelected;
@@ -59,34 +64,28 @@ namespace CourseManagement {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ PaidWeeks;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ AttendedPercentage;
 	private: System::Windows::Forms::DataGridViewButtonColumn^ DropStudentButton;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn2;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn3;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn4;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ IsOwed;
+	private: System::Windows::Forms::DataGridViewButtonColumn^ FetchButton;
+	private: System::Windows::Forms::Button^ UpdateEnrollsButton;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	private: System::Windows::Forms::DataGridViewButtonColumn^ PayStudentButton;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		   List<EnrollRequest^>^ enrollRequests;
 
 	public:
 		App(void)
@@ -95,6 +94,7 @@ namespace CourseManagement {
 
 			courses = gcnew List<Course^>();
 			enrollRequests = gcnew List<EnrollRequest^>();
+			students = gcnew List<Student^>();
 		}
 
 	protected:
@@ -289,6 +289,7 @@ namespace CourseManagement {
 			this->AddEnrollRequestCourseIDErrorProvider = (gcnew System::Windows::Forms::ErrorProvider(this->components));
 			this->AddEnrollRequestTypeErrorProvider = (gcnew System::Windows::Forms::ErrorProvider(this->components));
 			this->DeleteEnrollRequestErrorProvider = (gcnew System::Windows::Forms::ErrorProvider(this->components));
+			this->UpdateEnrollsButton = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->CoursesTable))->BeginInit();
 			this->AddCourseForm->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AddCourseLanguageErrorProvider))->BeginInit();
@@ -319,7 +320,7 @@ namespace CourseManagement {
 			this->WeekLabel->AutoSize = true;
 			this->WeekLabel->Font = (gcnew System::Drawing::Font(L"JetBrains Mono", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->WeekLabel->Location = System::Drawing::Point(822, 47);
+			this->WeekLabel->Location = System::Drawing::Point(617, 47);
 			this->WeekLabel->Name = L"WeekLabel";
 			this->WeekLabel->Size = System::Drawing::Size(103, 27);
 			this->WeekLabel->TabIndex = 0;
@@ -331,7 +332,7 @@ namespace CourseManagement {
 			this->WeekTextbox->Enabled = false;
 			this->WeekTextbox->Font = (gcnew System::Drawing::Font(L"JetBrains Mono", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->WeekTextbox->Location = System::Drawing::Point(928, 44);
+			this->WeekTextbox->Location = System::Drawing::Point(723, 44);
 			this->WeekTextbox->Name = L"WeekTextbox";
 			this->WeekTextbox->ReadOnly = true;
 			this->WeekTextbox->Size = System::Drawing::Size(206, 35);
@@ -510,7 +511,7 @@ namespace CourseManagement {
 			// 
 			this->IncrementLoopButton->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->IncrementLoopButton->Location = System::Drawing::Point(1142, 40);
+			this->IncrementLoopButton->Location = System::Drawing::Point(935, 40);
 			this->IncrementLoopButton->Name = L"IncrementLoopButton";
 			this->IncrementLoopButton->Size = System::Drawing::Size(129, 45);
 			this->IncrementLoopButton->TabIndex = 11;
@@ -816,6 +817,7 @@ namespace CourseManagement {
 			// 
 			// StudentsTab
 			// 
+			this->StudentsTab->Controls->Add(this->PanelStudentSelected);
 			this->StudentsTab->Controls->Add(this->PanelStudentNotSelected);
 			this->StudentsTab->Controls->Add(this->StudentsTable);
 			this->StudentsTab->Location = System::Drawing::Point(4, 30);
@@ -830,7 +832,7 @@ namespace CourseManagement {
 			this->PanelStudentSelected->Controls->Add(this->StudentInfoTable);
 			this->PanelStudentSelected->Controls->Add(this->StudentIDTextbox);
 			this->PanelStudentSelected->Controls->Add(this->StudentIDLabel);
-			this->PanelStudentSelected->Location = System::Drawing::Point(0, 0);
+			this->PanelStudentSelected->Location = System::Drawing::Point(645, 50);
 			this->PanelStudentSelected->Name = L"PanelStudentSelected";
 			this->PanelStudentSelected->Size = System::Drawing::Size(587, 496);
 			this->PanelStudentSelected->TabIndex = 16;
@@ -920,7 +922,6 @@ namespace CourseManagement {
 			// 
 			// PanelStudentNotSelected
 			// 
-			this->PanelStudentNotSelected->Controls->Add(this->PanelStudentSelected);
 			this->PanelStudentNotSelected->Controls->Add(this->StudentNotSelectedLabel);
 			this->PanelStudentNotSelected->Location = System::Drawing::Point(645, 50);
 			this->PanelStudentNotSelected->Name = L"PanelStudentNotSelected";
@@ -951,8 +952,9 @@ namespace CourseManagement {
 			this->StudentsTable->Name = L"StudentsTable";
 			this->StudentsTable->ReadOnly = true;
 			this->StudentsTable->RowHeadersVisible = false;
-			this->StudentsTable->Size = System::Drawing::Size(573, 495);
+			this->StudentsTable->Size = System::Drawing::Size(563, 493);
 			this->StudentsTable->TabIndex = 14;
+			this->StudentsTable->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &App::StudentsTable_CellContentClick);
 			// 
 			// dataGridViewTextBoxColumn2
 			// 
@@ -988,7 +990,10 @@ namespace CourseManagement {
 			this->FetchButton->HeaderText = L"Инфо";
 			this->FetchButton->Name = L"FetchButton";
 			this->FetchButton->ReadOnly = true;
-			this->FetchButton->Width = 60;
+			this->FetchButton->Resizable = System::Windows::Forms::DataGridViewTriState::True;
+			this->FetchButton->SortMode = System::Windows::Forms::DataGridViewColumnSortMode::Automatic;
+			this->FetchButton->Text = L"...";
+			this->FetchButton->Width = 50;
 			// 
 			// IndividualTab
 			// 
@@ -1039,11 +1044,24 @@ namespace CourseManagement {
 			// 
 			this->DeleteEnrollRequestErrorProvider->ContainerControl = this;
 			// 
+			// UpdateEnrollsButton
+			// 
+			this->UpdateEnrollsButton->Font = (gcnew System::Drawing::Font(L"JetBrains Mono Medium", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->UpdateEnrollsButton->Location = System::Drawing::Point(1070, 40);
+			this->UpdateEnrollsButton->Name = L"UpdateEnrollsButton";
+			this->UpdateEnrollsButton->Size = System::Drawing::Size(200, 45);
+			this->UpdateEnrollsButton->TabIndex = 16;
+			this->UpdateEnrollsButton->Text = L"Обновить студентов";
+			this->UpdateEnrollsButton->UseVisualStyleBackColor = true;
+			this->UpdateEnrollsButton->Click += gcnew System::EventHandler(this, &App::UpdateEnrollsButton_Click);
+			// 
 			// App
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1302, 741);
+			this->Controls->Add(this->UpdateEnrollsButton);
 			this->Controls->Add(this->TitleLabel);
 			this->Controls->Add(this->AppTabWrapper);
 			this->Controls->Add(this->IncrementLoopButton);
@@ -1148,16 +1166,32 @@ namespace CourseManagement {
 
 	// Global
 	private: System::Void IncrementLoopButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		// TODO: Implement updating logic
-
 		this->WeekTextbox->Text = Convert::ToString(Int32::Parse(this->WeekTextbox->Text) + 2);
+	}
+
+	private: System::Void UpdateEnrollsButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		for each(EnrollRequest ^ enrollRequest in enrollRequests) {
+			if (enrollRequest->Type == "Индивидуальное") {
+
+			}
+		}
+
+
+		for each(EnrollRequest ^ enrollRequest in enrollRequests) {
+			Student^ newStudent = gcnew Student(GetNextID(students),
+												enrollRequest->FirstName,
+												enrollRequest->LastName);
+			students->Add(newStudent);
+		}
+
+		UpdateStudentsTable();
 	}
 
 	// Courses Tab
 	private: System::Void UpdateCourseTable() {
 		this->CoursesTable->Rows->Clear();
 		for each (Course^ course in courses) {
-			CoursesTable->Rows->Add(course->ID,
+			this->CoursesTable->Rows->Add(course->ID,
 									course->Language,
 									course->Level,
 									course->Intensity);
@@ -1251,7 +1285,7 @@ namespace CourseManagement {
 	private: System::Void UpdateEnrollRequestsTable() {
 		this->EnrollRequestsTable->Rows->Clear();
 		for each (EnrollRequest ^ enrollRequest in enrollRequests) {
-			EnrollRequestsTable->Rows->Add(enrollRequest->ID,
+			this->EnrollRequestsTable->Rows->Add(enrollRequest->ID,
 											enrollRequest->FirstName,
 											enrollRequest->LastName,
 											enrollRequest->CourseID,
@@ -1348,6 +1382,38 @@ namespace CourseManagement {
 
 		DeleteByID(this->enrollRequests, Convert::ToString(id));
 		UpdateEnrollRequestsTable();
+	}
+
+
+	// Students table
+	private: System::Void UpdateStudentsTable() {
+		this->StudentsTable->Rows->Clear();
+
+		for each (Student^ student in students) {
+			this->StudentsTable->Rows->Add(student->ID,
+								 	 student->FirstName,
+									 student->LastName,
+									 "Есть", "...");
+		}
+	}
+
+	private: System::Void FetchStudentInfo(int id) {
+		this->StudentIDTextbox->Text = Convert::ToString(id);
+	}
+	
+	private: System::Void StudentsTable_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		if (e->ColumnIndex != 4) {
+			return;
+		}
+
+		this->PanelStudentNotSelected->Visible = false;
+		this->PanelStudentSelected->Visible = true;
+
+		int rowIndex = e->RowIndex;
+		int id;
+		if (Int32::TryParse(this->StudentsTable->Rows[rowIndex]->Cells[0]->Value->ToString(), id)) {
+			FetchStudentInfo(id);
+		}
 	}
 };
 }
