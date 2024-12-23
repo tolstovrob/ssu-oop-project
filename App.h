@@ -1181,6 +1181,7 @@ namespace CourseManagement {
 
 	private: System::Void UpdateEnrollsButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		cliext::map<int, List<EnrollRequest^>^> bufferGroupEnrollRequests;
+		cliext::map<int, List<Student^>^> bufferStudents;
 		cliext::map<int, GroupClass^> bufferGroups;
 		cliext::set<int> courseIDs;
 
@@ -1191,10 +1192,12 @@ namespace CourseManagement {
 		for each (int courseID in courseIDs) {
 			int bufferID = GetNextID(groupClasses);
 			GroupClass^ bufferGroup = gcnew GroupClass(bufferID, courseID);
-			List<EnrollRequest^>^ bufferGroupEnrollRequest = gcnew List<EnrollRequest^>();
+			List<EnrollRequest^>^ bufferGroupEnrollRequestsList = gcnew List<EnrollRequest^>();
+			List<Student^>^ bufferStudentsList = gcnew List<Student^>();
 
 			bufferGroups.insert(cliext::map<int, GroupClass^>::make_value(courseID, bufferGroup));
-			bufferGroupEnrollRequests.insert(cliext::map<int, List<EnrollRequest^>^>::make_value(courseID, bufferGroupEnrollRequest));
+			bufferGroupEnrollRequests.insert(cliext::map<int, List<EnrollRequest^>^>::make_value(courseID, bufferGroupEnrollRequestsList));
+			bufferStudents.insert(cliext::map<int, List<Student^>^>::make_value(courseID, bufferStudentsList));
 		}
 
 		for (int i = 0; i < enrollRequests->Count; ++i) {
@@ -1208,29 +1211,32 @@ namespace CourseManagement {
 				IndividualClass^ newClass = gcnew IndividualClass(GetNextID(individualClasses), enrollRequest->CourseID, curStudentInfo);
 				individualClasses->Add(newClass);
 				enrollRequests->RemoveAt(i);
+				students->Add(curStudent);
 				--i;
 			}
 			else {
 				bufferGroups[enrollRequest->CourseID]->enrollStudent(studentID);
 				bufferGroupEnrollRequests[enrollRequest->CourseID]->Add(enrollRequest);
+				bufferStudents[enrollRequest->CourseID]->Add(curStudent);
 
 				if (bufferGroups[enrollRequest->CourseID]->Students->Count == 7) {
 					groupClasses->Add(bufferGroups[enrollRequest->CourseID]);
-					bufferGroups[enrollRequest->CourseID]->Students->Clear();
-
 					i -= bufferGroupEnrollRequests[enrollRequest->CourseID]->Count;
 
 					for each (EnrollRequest ^ enrollRequest in bufferGroupEnrollRequests[enrollRequest->CourseID]) {
 						enrollRequests->Remove(enrollRequest);
 					}
 
-					bufferGroupEnrollRequests[enrollRequest->CourseID]->Clear();
+					for each (Student ^ student in bufferStudents[enrollRequest->CourseID]) {
+						students->Add(student);
+					}
 
+					bufferStudents[enrollRequest->CourseID]->Clear();
+					bufferGroupEnrollRequests[enrollRequest->CourseID]->Clear();
 					bufferGroups[enrollRequest->CourseID]->ID = GetNextID(groupClasses);
+					bufferGroups[enrollRequest->CourseID]->Students->Clear();
 				}
 			}
-
-			students->Add(curStudent);
 		}
 
 		for each (int courseID in courseIDs) {
