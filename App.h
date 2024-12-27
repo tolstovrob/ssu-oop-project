@@ -155,15 +155,15 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ StudentsLastName;
 private: System::Windows::Forms::DataGridViewTextBoxColumn^ StudentsFirstName;
 private: System::Windows::Forms::DataGridViewTextBoxColumn^ StudentsIsOwed;
 private: System::Windows::Forms::DataGridViewButtonColumn^ StudentsFetchButton;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesID;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesIsCourseID;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesIsStudentID;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesLastName;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesFirstName;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesIsOwed;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesAttendancePercentage;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesIsDropButton;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesIsPayButton;
+
+
+
+
+
+
+
+
+
 private: System::Windows::Forms::DataGridView^ GroupClassesTable;
 
 
@@ -190,6 +190,15 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxC
 private: System::Windows::Forms::DataGridViewTextBoxColumn^ GroupClassesCourseID;
 private: System::Windows::Forms::DataGridViewTextBoxColumn^ GroupClassesStudentID;
 private: System::Windows::Forms::DataGridViewButtonColumn^ dataGridViewButtonColumn3;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesID;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesIsCourseID;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesIsStudentID;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesLastName;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesFirstName;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesIsOwed;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ IndividualClassesAttendancePercentage;
+private: System::Windows::Forms::DataGridViewButtonColumn^ IndividualClassesIsDropButton;
+private: System::Windows::Forms::DataGridViewButtonColumn^ IndividualClassesIsPayButton;
 private: System::Windows::Forms::DataGridViewTextBoxColumn^ GroupClassesDropGroup;
 
 
@@ -426,8 +435,8 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ GroupClassesDropGrou
 			this->IndividualClassesFirstName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->IndividualClassesIsOwed = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->IndividualClassesAttendancePercentage = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->IndividualClassesIsDropButton = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->IndividualClassesIsPayButton = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->IndividualClassesIsDropButton = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
+			this->IndividualClassesIsPayButton = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
 			this->GroupTabs = (gcnew System::Windows::Forms::TabPage());
 			this->GroupClassesTable = (gcnew System::Windows::Forms::DataGridView());
 			this->dataGridViewTextBoxColumn4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -1194,6 +1203,7 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ GroupClassesDropGrou
 			this->IndividualClassesTable->RowHeadersVisible = false;
 			this->IndividualClassesTable->Size = System::Drawing::Size(1053, 493);
 			this->IndividualClassesTable->TabIndex = 17;
+			this->IndividualClassesTable->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &App::IndividualClassesTable_CellContentClick);
 			// 
 			// IndividualClassesID
 			// 
@@ -1249,12 +1259,16 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ GroupClassesDropGrou
 			this->IndividualClassesIsDropButton->HeaderText = L"Закрыть класс";
 			this->IndividualClassesIsDropButton->Name = L"IndividualClassesIsDropButton";
 			this->IndividualClassesIsDropButton->ReadOnly = true;
+			this->IndividualClassesIsDropButton->Resizable = System::Windows::Forms::DataGridViewTriState::True;
+			this->IndividualClassesIsDropButton->SortMode = System::Windows::Forms::DataGridViewColumnSortMode::Automatic;
 			// 
 			// IndividualClassesIsPayButton
 			// 
 			this->IndividualClassesIsPayButton->HeaderText = L"Продлить";
 			this->IndividualClassesIsPayButton->Name = L"IndividualClassesIsPayButton";
 			this->IndividualClassesIsPayButton->ReadOnly = true;
+			this->IndividualClassesIsPayButton->Resizable = System::Windows::Forms::DataGridViewTriState::True;
+			this->IndividualClassesIsPayButton->SortMode = System::Windows::Forms::DataGridViewColumnSortMode::Automatic;
 			// 
 			// GroupTabs
 			// 
@@ -1595,8 +1609,47 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ GroupClassesDropGrou
 		}
 
 	// Global
+	private: System::Void LongerStudent(int id) {
+		for each (IndividualClass ^ individualClass in individualClasses) {
+			if (individualClass->ID == id) {
+				individualClass->Student->PaidWeeksLeft += 2;
+				MessageBox::Show("Студент ID=" + id + " успешно оплатил ещё две недели обучения!");
+				return;
+			}
+		}
+
+		MessageBox::Show("Студент ID=" + id + " не найден");
+	}
+
+	private: System::Void DropStudent(int id) {
+		for each(IndividualClass ^ individualClass in individualClasses) {
+			if (individualClass->ID == id) {
+				individualClasses->Remove(individualClass);
+				MessageBox::Show("Студент ID=" + id + " успешно удалён с обучения!");
+				return;
+			}
+		}
+
+		MessageBox::Show("Студент ID=" + id + " не найден");
+	}
+
 	private: System::Void IncrementLoopButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		Random^ random = gcnew Random();
+
+		// Update attendance
+		for each (IndividualClass ^ individualClass in individualClasses) {
+			individualClass->Student->AttendancePercentage = random->NextDouble();
+			if (individualClass->Student->AttendancePercentage < 0.5) {
+				individualClass->Student->AttendancePercentage += 0.25;
+			}
+			individualClass->Student->AttendancePercentage *= 100;
+		}
+
 		this->WeekTextbox->Text = Convert::ToString(Int32::Parse(this->WeekTextbox->Text) + 2);
+		UpdateCourseTable();
+		UpdateEnrollRequestsTable();
+		UpdateStudentsTable();
+		UpdateIndividualClassesTable();
 	}
 
 	private: System::Void UpdateEnrollsButton_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -1728,6 +1781,7 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ GroupClassesDropGrou
 		}
 
 		UpdateStudentsTable();
+		UpdateIndividualClassesTable();
 		UpdateEnrollRequestsTable();
 	}
 
@@ -2026,6 +2080,53 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ GroupClassesDropGrou
 					break;
 				}
 			}
+		}
+
+		UpdateStudentsTable();
+		UpdateEnrollRequestsTable();
+	}
+
+	 // Individuals Tab
+	private: System::Void UpdateIndividualClassesTable() {
+		this->IndividualClassesTable->Rows->Clear();
+
+		for each (IndividualClass ^ individualClass in individualClasses) {
+			int id = individualClass->Student->ID;
+			String^ FirstName;
+			String^ LastName;
+			for each (Student ^ student in students) {
+				if (student->ID == id) {
+					FirstName = student->FirstName;
+					LastName = student->LastName;
+					break;
+				}
+			}
+
+			if (FirstName->Length == 0) {
+				MessageBox::Show("Ошибка: ID студента не найдено в таблице студентов");
+				return;
+			}
+
+			this->IndividualClassesTable->Rows->Add(individualClass->ID,
+													individualClass->CourseID,
+													individualClass->Student->ID,
+													FirstName,
+													LastName,
+													individualClass->Student->PaidWeeksLeft,
+													individualClass->Student->AttendancePercentage,
+													"X", ">");
+		}
+	}
+
+	private: System::Void IndividualClassesTable_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		int studentID = Int32::Parse(Convert::ToString(this->StudentInfoTable->Rows[e->RowIndex]->Cells[2]->Value));
+		MessageBox::Show("fine");
+		if (e->ColumnIndex == 8) {
+			MessageBox::Show("aboba");
+			LongerStudent(studentID);
+		}
+		else if (e->ColumnIndex == 7) {
+			DropStudent(studentID);
 		}
 
 		UpdateStudentsTable();
