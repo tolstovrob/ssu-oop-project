@@ -19,6 +19,7 @@ namespace CourseManagement {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Windows;
 
 	/// <summary>
 	/// Сводка для App
@@ -1611,7 +1612,7 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ GroupClassesDropGrou
 	// Global
 	private: System::Void LongerStudent(int id) {
 		for each (IndividualClass ^ individualClass in individualClasses) {
-			if (individualClass->ID == id) {
+			if (individualClass->Student->ID == id) {
 				individualClass->Student->PaidWeeksLeft += 2;
 				MessageBox::Show("Студент ID=" + id + " успешно оплатил ещё две недели обучения!");
 				return;
@@ -1623,7 +1624,7 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ GroupClassesDropGrou
 
 	private: System::Void DropStudent(int id) {
 		for each(IndividualClass ^ individualClass in individualClasses) {
-			if (individualClass->ID == id) {
+			if (individualClass->Student->ID == id) {
 				individualClasses->Remove(individualClass);
 				MessageBox::Show("Студент ID=" + id + " успешно удалён с обучения!");
 				return;
@@ -1636,13 +1637,33 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ GroupClassesDropGrou
 	private: System::Void IncrementLoopButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		Random^ random = gcnew Random();
 
-		// Update attendance
+		// Update attendance, -2 paids
+		List<int>^ toDropStudents = gcnew List<int>();
 		for each (IndividualClass ^ individualClass in individualClasses) {
-			individualClass->Student->AttendancePercentage = random->NextDouble();
-			if (individualClass->Student->AttendancePercentage < 0.5) {
-				individualClass->Student->AttendancePercentage += 0.25;
+			individualClass->Student->AttendancePercentage = Convert::ToInt32(random->NextDouble() * 100);
+			if (individualClass->Student->AttendancePercentage < 50) {
+				individualClass->Student->AttendancePercentage += 15;
 			}
-			individualClass->Student->AttendancePercentage *= 100;
+
+			if ((individualClass->Student->AttendancePercentage < 33) && (MessageBox::Show("Студент ID=" + individualClass->Student->ID + " посетил " + individualClass->Student->AttendancePercentage + "% занятий за последние две недели. Отчислить его за прогулы (\"Да\")?", "Просрок оплаты", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == System::Windows::Forms::DialogResult::Yes)) {
+				toDropStudents->Add(individualClass->Student->ID);
+				continue;
+			}
+
+			individualClass->Student->PaidWeeksLeft -= 2;
+			if (individualClass->Student->PaidWeeksLeft < 0) {
+				if (MessageBox::Show("Студент ID=" + individualClass->Student->ID + " не оплатил следующие 2 недели занятий. Продлить студента (\"Да\") или отчислить (\"Нет\")", "Просрок оплаты", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == System::Windows::Forms::DialogResult::Yes) {
+					LongerStudent(individualClass->Student->ID);
+				}
+				else {
+					toDropStudents->Add(individualClass->Student->ID);
+				}
+				
+			}
+		}
+
+		for each (int studentID in toDropStudents) {
+			DropStudent(studentID);
 		}
 
 		this->WeekTextbox->Text = Convert::ToString(Int32::Parse(this->WeekTextbox->Text) + 2);
@@ -2081,6 +2102,21 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ GroupClassesDropGrou
 				}
 			}
 		}
+		else if (e->ColumnIndex == 4) {
+			for each (GroupClass ^ groupClass in groupClasses) {
+				if (groupClass->ID == classID) {
+					LongerStudent(selectedStudentID);
+					break;
+				}
+			}
+
+			for each (IndividualClass ^ individualClass in individualClasses) {
+				if (individualClass->ID == classID) {
+					individualClasses->Remove(individualClass);
+					break;
+				}
+			}
+		}
 
 		UpdateStudentsTable();
 		UpdateEnrollRequestsTable();
@@ -2119,10 +2155,8 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ GroupClassesDropGrou
 	}
 
 	private: System::Void IndividualClassesTable_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-		int studentID = Int32::Parse(Convert::ToString(this->StudentInfoTable->Rows[e->RowIndex]->Cells[2]->Value));
-		MessageBox::Show("fine");
+		int studentID = Int32::Parse(Convert::ToString(this->IndividualClassesTable->Rows[e->RowIndex]->Cells[2]->Value));
 		if (e->ColumnIndex == 8) {
-			MessageBox::Show("aboba");
 			LongerStudent(studentID);
 		}
 		else if (e->ColumnIndex == 7) {
@@ -2131,6 +2165,7 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ GroupClassesDropGrou
 
 		UpdateStudentsTable();
 		UpdateEnrollRequestsTable();
+		UpdateIndividualClassesTable();
 	}
 };
 }
